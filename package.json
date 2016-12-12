@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jamesrichford/web-app-seed/issues"
   },
-  "homepage": "https://github.com/jamesrichford/web-app-seed#readme"
+  "homepage": "https://github.com/jamesrichford/web-app-seed#readme",
+  "devDependencies": {
+    "typescript": "^2.1.4"
+  }
 }
