@@ -1,0 +1,19 @@
+{
+  "name": "web-app-seed",
+  "version": "1.0.0",
+  "description": "seed for a new web app",
+  "main": "server/startup.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jamesrichford/web-app-seed.git"
+  },
+  "author": "James Richford <=> (=)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jamesrichford/web-app-seed/issues"
+  },
+  "homepage": "https://github.com/jamesrichford/web-app-seed#readme"
+}
