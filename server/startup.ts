@@ -1,14 +1,19 @@
-import FinalHandler from "finalhandler";
-import Http from "http";
-import ServeStatic from "serve-static";
+import * as FinalHandler from "finalhandler";
+import * as Http from "http";
+import * as ServeStatic from "serve-static";
 
-// Serve up public/ftp folder
-var serve = ServeStatic('public/ftp', {'index': ['index.html', 'index.htm']})
+// Serve up public folder
+const serve = ServeStatic("public", { index: ["index.html"] });
 
 // Create server
-var server = Http.createServer(function onRequest (req, res) {
-  serve(<any>req, <any>res, FinalHandler(req, res))
+const server = Http.createServer((req, res) => {
+  serve(<any>req, <any>res, FinalHandler(req, res));
+  console.log(req.url);
 })
 
 // Listen
-server.listen(3000)
+const portNumber = 3000;
+
+server.listen(portNumber);
+
+console.log("serving at port", portNumber);

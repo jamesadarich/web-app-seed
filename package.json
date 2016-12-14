@@ -4,7 +4,9 @@
   "description": "seed for a new web app",
   "main": "server/startup.js",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "npm run build",
     "start": "node server/startup.js"
   },
   "repository": {
