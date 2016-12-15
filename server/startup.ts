@@ -1,19 +1,18 @@
-import * as FinalHandler from "finalhandler";
-import * as Http from "http";
 import * as ServeStatic from "serve-static";
-
-// Serve up public folder
-const serve = ServeStatic("public", { index: ["index.html"] });
+import * as Express from "express";
 
 // Create server
-const server = Http.createServer((req, res) => {
-  serve(<any>req, <any>res, FinalHandler(req, res));
-  console.log(req.url);
-})
+const server = Express();
+
+// Serve up public folder
+server.use(ServeStatic("public", { index: ["index.html"] }));
+
+// Serve up index as fallback for SPA
+server.get('*', (req, res) => {
+    res.sendfile('./public/index.html');
+});
 
 // Listen
 const portNumber = 3000;
-
 server.listen(portNumber);
-
 console.log("serving at port", portNumber);
