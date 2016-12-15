@@ -9,8 +9,8 @@ const server = Express();
 server.use(ServeStatic("public", { index: ["index.html"] }));
 
 // Serve up index as fallback for SPA
-server.get('*', (req, res) => {
-    res.sendFile('./public/index.html',  { root: Path.join(__dirname, '../public') });
+server.get("*", (req, res) => {
+    res.sendFile("/index.html", { root: Path.join(__dirname, "../public") });
 });
 
 // Listen
