@@ -5,7 +5,9 @@
   "main": "server/startup.js",
   "scripts": {
     "build": "npm run build-server && npm run build-web-app",
-    "build-web-app": "tsc -p ./public/src",
+    "build-web-app": "npm run build-web-app-typescript && npm run build-web-app-sass",
+    "build-web-app-typescript": "tsc -p ./public/src",
+    "build-web-app-sass": "node-sass --include-path scss public/src/styles/styles.scss public/dist/styles/styles.css",
     "build-server": "tsc -p ./server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "npm run build",
