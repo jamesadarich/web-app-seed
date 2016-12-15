@@ -21,14 +21,12 @@
   "homepage": "https://github.com/jamesrichford/web-app-seed#readme",
   "devDependencies": {
     "@types/express": "^4.0.34",
-    "@types/finalhandler": "0.0.31",
     "@types/node": "^6.0.52",
     "@types/serve-static": "^1.7.31",
     "typescript": "^2.1.4"
   },
   "dependencies": {
     "express": "^4.14.0",
-    "finalhandler": "^0.5.1",
     "serve-static": "^1.11.1"
   }
 }
