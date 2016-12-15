@@ -4,7 +4,9 @@
   "description": "seed for a new web app",
   "main": "server/startup.js",
   "scripts": {
-    "build": "tsc",
+    "build": "npm run build-server && npm run build-web-app",
+    "build-web-app": "tsc -p ./public/src",
+    "build-server": "tsc -p ./server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "npm run build",
     "start": "node server/startup.js"
