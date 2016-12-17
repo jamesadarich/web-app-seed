@@ -4,7 +4,7 @@ import { TestFixture, Test, Expect } from "alsatian";
 export default class ExampleTests {
 
     @Test("two plus two make four")
-    public twoPlusTwoMakeFour() {
+    public twoPlusTwoMakeFour(): void {
         Expect(2 + 2).toBe(4);
     }
 }
