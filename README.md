@@ -4,6 +4,8 @@ A template to build a web app from
 
 ## Scripts
 
+First off of course you'll have to run `npm install`.
+
 Start developing using `npm run dev`.
 
 This will listen to updates in the code and rebuilds it automatically.
