@@ -1,1 +1,3 @@
-console.log("startup successful");
+const startupNotification = document.createElement("h1");
+startupNotification.innerHTML = "startup successful";
+document.body.appendChild(startupNotification);

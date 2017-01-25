@@ -1,4 +1,4 @@
-import { TestFixture, Test, Expect } from "alsatian";
+import { Expect, Test, TestFixture } from "alsatian";
 
 @TestFixture("example tests")
 export default class ExampleTests {

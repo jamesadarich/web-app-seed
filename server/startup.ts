@@ -1,6 +1,6 @@
-import * as ServeStatic from "serve-static";
 import * as Express from "express";
 import * as Path from "path";
+import * as ServeStatic from "serve-static";
 
 // create server
 const server: Express.Application = Express();
@@ -16,4 +16,4 @@ server.get("*", (request, response) => {
 // listen
 const portNumber: number = 3000;
 server.listen(portNumber);
-console.log("serving at port", portNumber);
+process.stdout.write("serving at port " + portNumber);
