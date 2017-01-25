@@ -1,7 +1,7 @@
 {
    "compilerOptions": {
       "target": "es5",
-      "module": "amd",
+      "module": "commonjs",
       "moduleResolution": "node",
       "noImplicitAny": true,
       "declaration": true,
@@ -9,8 +9,7 @@
       "preserveConstEnums": true,
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
-      "newLine": "LF",
-      "outFile": "../dist/scripts/bundle.js"
+      "newLine": "LF"
    },
    "buildOnSave": false,
    "compileOnSave": true,

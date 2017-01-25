@@ -7,9 +7,13 @@
     "build": "npm run build-server && npm run build-web-app",
     "build-web-app": "npm run build-web-app-images && npm run build-web-app-typescript && npm run build-web-app-sass",
     "build-web-app-images": "imagemin public/src/images/**/*.* --out-dir=public/dist/images",
-    "build-web-app-typescript": "tsc -p ./public/src",
+    "build-web-app-typescript": "webpack",
     "build-web-app-sass": "node-sass --include-path scss public/src/styles/styles.scss public/dist/styles/styles.css",
     "build-server": "tsc -p ./server",
+    "dev": "npm run build-server && npm-run-all --parallel  start-web-server dev-web-app",
+    "dev-web-app": "npm-run-all --parallel build-web-app-images dev-web-app-typescript dev-web-app-sass",
+    "dev-web-app-typescript": "webpack --watch",
+    "dev-web-app-sass": "node-sass --watch --include-path scss public/src/styles/styles.scss public/dist/styles/styles.css",
     "pretest": "npm run build-unit-tests",
     "build-unit-tests": "tsc -p ./test/unit-tests",
     "review": "npm run review-typescript & npm run review-sass",
@@ -18,7 +22,8 @@
     "test": "npm run review && npm run unit-tests",
     "unit-tests": "alsatian \"./test/unit-tests/**/*.spec.js\"",
     "prestart": "npm run build",
-    "start": "node server/startup.js"
+    "start-web-server": "node server/startup.js",
+    "start": "npm run start-web-server"
   },
   "repository": {
     "type": "git",
@@ -37,9 +42,12 @@
     "alsatian": "^1.0.0-beta.4",
     "imagemin-cli": "^3.0.0",
     "node-sass": "^4.0.0",
+    "npm-run-all": "^4.0.1",
     "sass-lint": "^1.10.2",
+    "ts-loader": "^2.0.0",
     "tslint": "^4.1.1",
-    "typescript": "^2.1.4"
+    "typescript": "^2.1.4",
+    "webpack": "^2.2.0"
   },
   "dependencies": {
     "express": "^4.14.0",
