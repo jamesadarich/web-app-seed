@@ -9,6 +9,12 @@ const server: Express.Application = Express();
 // setup compression
 server.use(Compression());
 
+// enable content based cache control
+server.enable("etag");
+
+// don't expose x-powered-by express header
+server.disable('x-powered-by');
+
 // serve up public folder
 server.use(ServeStatic("public", { index: ["index.html"] }));
 
