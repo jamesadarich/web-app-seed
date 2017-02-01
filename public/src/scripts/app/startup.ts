@@ -1,3 +1,6 @@
+// load the stylesheet
+require("!style-loader!css-loader!sass-loader!../../styles/stylesheets/app.scss");
+
 // start the app (dummy example)
 const startupNotification = document.createElement("h1");
 startupNotification.innerHTML = "startup successful";

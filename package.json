@@ -11,23 +11,19 @@
     "build-web-app-sass": "node-sass --output-style compressed public/src/styles/stylesheets --output public/dist/styles",
     "build-web-app-html": "handlebars ./public/src/index.html -f ./public/dist/index.html",
     "build-server": "tsc -p ./server",
-
     "dev": "npm run build-server && npm-run-all --parallel start-web-server dev-web-app",
     "dev-web-app": "npm-run-all --parallel expose-to-networked-devices build-web-app-images dev-web-app-typescript dev-web-app-sass",
     "dev-web-app-typescript": "webpack --watch --devtool source-map",
     "dev-web-app-sass": "npm-run-all build-web-app-sass watch-web-app-sass",
     "watch-web-app-sass": "node-sass --watch public/src/styles/stylesheets --output public/dist/styles",
     "expose-to-networked-devices": "browser-sync start --proxy localhost:3000 --files \"css/*.css\"",
-
     "review": "npm run review-typescript & npm run review-sass",
     "review-typescript": "tslint \"**/*.ts\" \"**/*.tsx\" --exclude \"**/*.d.ts\" --exclude \"node_modules/**/*.*\"",
     "review-sass": "sass-lint \"**/*.scss\" --ignore \"node_modules/**/*.*\"",
-
     "pretest": "npm run build-unit-tests",
     "test": "npm run review && npm run unit-tests",
     "build-unit-tests": "tsc -p ./test/unit-tests",
     "unit-tests": "alsatian \"./test/unit-tests/**/*.spec.js\"",
-    
     "prestart": "npm run build",
     "start-web-server": "node server/startup.js",
     "start": "npm run start-web-server"
@@ -49,10 +45,13 @@
     "@types/serve-static": "^1.7.31",
     "alsatian": "^1.0.0-beta.4",
     "browser-sync": "^2.18.6",
+    "css-loader": "^0.26.1",
     "imagemin-cli": "^3.0.0",
     "node-sass": "^4.0.0",
     "npm-run-all": "^4.0.1",
     "sass-lint": "^1.10.2",
+    "sass-loader": "^4.1.1",
+    "style-loader": "^0.13.1",
     "ts-loader": "^2.0.0",
     "tslint": "^4.1.1",
     "typescript": "^2.1.4",
