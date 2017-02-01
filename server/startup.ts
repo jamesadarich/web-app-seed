@@ -16,11 +16,11 @@ server.enable("etag");
 server.disable('x-powered-by');
 
 // serve up public folder
-server.use(ServeStatic("public", { index: ["index.html"] }));
+server.use(ServeStatic("public/dist", { index: ["index.html"] }));
 
 // serve up index as fallback for SPA
 server.get("*", (request, response) => {
-    response.sendFile("/index.html", { root: Path.join(__dirname, "../public") });
+    response.sendFile("/index.html", { root: Path.join(__dirname, "../public/dist") });
 });
 
 // listen
