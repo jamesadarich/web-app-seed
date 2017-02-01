@@ -1,7 +1,10 @@
 module.exports = {
-  entry: "./public/src/scripts/startup.ts",
+  entry: {
+    "app-startup": "./public/src/scripts/app/startup.ts",
+    "legacy-app-loading": "./public/src/scripts/app-loading/legacy-app-loading.ts"
+  },
   output: {
-    filename: "bundle.js",
+    filename: "[name].js",
     path: "./public/dist/scripts"
   },
   resolve: {

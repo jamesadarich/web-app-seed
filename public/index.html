@@ -12,11 +12,14 @@
         <link href="/dist/styles/loading.css" type="text/css" rel="stylesheet" />
         <link href="/dist/styles/app.css" type="text/css" rel="stylesheet" />
 
-        <!-- PAGE SCRIPT -->
-        <script src="/dist/scripts/bundle.js" async type="text/javascript"></script>
+        <!-- PAGE SCRIPTS -->
+        <script src="/dist/scripts/app-startup.js" async type="text/javascript"></script>
+        <!--[if lte IE 9]>
+            <script async src="/dist/scripts/legacy-app-loading.js"></script>
+        <![endif]-->
     </head>
     <body>
-        <div class="loading">
+        <div class="app-loading-notification">
             <div class="loading-message">
                 <h1>loading</h1>
                 <div class="loading-indicator">
