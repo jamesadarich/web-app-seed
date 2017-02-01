@@ -9,7 +9,6 @@
     "build-web-app-images": "imagemin public/src/images/**/*.* --out-dir=public/dist/images",
     "build-web-app-typescript": "webpack --optimize-minimize",
     "build-web-app-sass": "node-sass --output-style compressed public/src/styles/stylesheets --output public/dist/styles",
-    "build-web-app-html": "handlebars ./public/src/index.html -f ./public/dist/index.html",
     "build-server": "tsc -p ./server",
     "dev": "npm run build-server && npm-run-all --parallel start-web-server dev-web-app",
     "dev-web-app": "npm-run-all --parallel expose-to-networked-devices build-web-app-images dev-web-app-typescript dev-web-app-sass",
