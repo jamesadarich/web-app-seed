@@ -20,6 +20,7 @@
 
 .loading-message {
     position: relative;
+    margin: 16px;
     top: 30%;
 }
 
@@ -29,20 +30,20 @@
     width: 18px;
         height: 18px;
         background-color: #e0f7fa;
-
+        margin: 4px;
         border-radius: 100%;
         display: inline-block;
-        -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
-        animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        -webkit-animation: sk-bouncedelay 1s infinite ease-in-out both;
+        animation: sk-bouncedelay 1s infinite ease-in-out both;
 
-        &:nth-child(1) {
-            -webkit-animation-delay: -0.32s;
-            animation-delay: -0.32s;
+        &:nth-child(2) {
+            -webkit-animation-delay: 0.2s;
+            animation-delay: 0.2s;
         }
 
-        &div:nth-child(2) {
-            -webkit-animation-delay: -0.16s;
-            animation-delay: -0.16s;
+        &:nth-child(3) {
+            -webkit-animation-delay: 0.4s;
+            animation-delay: 0.4s;
         }
     }
 }
