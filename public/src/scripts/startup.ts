@@ -1,3 +1,7 @@
 const startupNotification = document.createElement("h1");
 startupNotification.innerHTML = "startup very successful";
-document.body.appendChild(startupNotification);
+
+setTimeout(() => {
+    document.querySelector(".loading").className += " complete";
+    document.body.appendChild(startupNotification);
+}, 2000);
