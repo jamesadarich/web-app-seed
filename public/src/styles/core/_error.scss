@@ -1,0 +1,31 @@
+$error-red: #F44336;
+$error-red-lighter: #FFEBEE;
+
+.error-container {
+    
+    font-family: sans-serif;
+    text-align: center;
+    background: $error-red-lighter;
+    color: $error-red;
+    padding: 16px;
+    border-radius: 4px;
+    border: 2px solid $error-red;
+
+    span {
+        display: block
+    }
+
+    .error-message {
+        margin: 8px;
+    }
+
+    .error-icon {
+        margin: 0 auto;
+        border: 4px solid $error-red;
+        font-size: 2em;
+        font-weight: 800;
+        width: 42px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+}

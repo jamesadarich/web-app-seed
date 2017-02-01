@@ -4,7 +4,7 @@
     display: none;
 }
 
-.no-script-error {
+.unsupported-browser-error {
     position: fixed;
     top: 35%;
     left: 0;
@@ -14,5 +14,9 @@
     .error-container {
         display: inline-block;
         margin: 16px;
+    }
+
+    .error-icon {
+        border: none;
     }
 }
