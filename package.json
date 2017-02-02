@@ -12,7 +12,7 @@
     "build-web-app-html": "node scripts/build-html",
     "build-scripts": "tsc -p ./scripts",
     "build-server": "tsc -p ./server",
-    "dev": "npm run build-server && npm-run-all --parallel start-web-server dev-web-app",
+    "dev": "npm run build-scripts && npm run build-server && npm-run-all --parallel start-web-server dev-web-app",
     "dev-web-app": "npm-run-all --parallel expose-to-networked-devices build-web-app-images dev-web-app-*",
     "dev-web-app-typescript": "webpack --watch --devtool source-map",
     "dev-web-app-sass": "npm run watch-web-app-sass",
