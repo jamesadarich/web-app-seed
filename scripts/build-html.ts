@@ -31,6 +31,7 @@ function buildWebAppHtml() {
 
 function getCacheMapping(mappingName: string) {
     
+    // get the mapping output from the cache buster
     const mappingConfig = JSON.parse(FileSystem.readFileSync(cacheMappingPath + mappingName + ".json", "utf-8"));
 
     const mapping: { [key: string]: string} = {};
@@ -44,7 +45,7 @@ function getCacheMapping(mappingName: string) {
         if (typeof remappedName === "string") {
             mapping[key] = remappedName; 
         }
-        // otherwise it's 
+        // otherwise it's an array so 
         else {            
             mapping[key] = remappedName[0]; 
         }
@@ -55,8 +56,10 @@ function getCacheMapping(mappingName: string) {
 
 buildWebAppHtml();
 
+// if we were told to watch
 if (process.argv.indexOf("--watch") !== -1) {
 
+    // check out the cache busting maps and rebuild when they change
     Watch.watchTree(cacheMappingPath,
     {
         filter: (path: string) => {
