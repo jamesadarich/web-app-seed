@@ -48,6 +48,7 @@
     "alsatian": "^1.0.0-beta.4",
     "browser-sync": "^2.18.6",
     "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
     "handlebars": "^4.0.6",
     "imagemin-cli": "^3.0.0",
     "node-sass": "^4.0.0",
