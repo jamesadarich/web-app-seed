@@ -6,12 +6,12 @@ module.exports = [
   {
     name: "app",
     entry: {
-      "app-startup": "./public/src/scripts/app/startup.ts",
-      "legacy-app-loading": "./public/src/scripts/app-loading/legacy-app-loading.ts"
+      "app-startup": "./app/scripts/app/startup.ts",
+      "legacy-app-loading": "./app/scripts/app-loading/legacy-app-loading.ts"
     },
     output: {
       filename: "[name]-[chunkhash].js",
-      path: "./public/dist/scripts"
+      path: "./dist/scripts"
     },
     resolve: {
       // Add `.ts` and `.tsx` as a resolvable extension.
@@ -20,7 +20,7 @@ module.exports = [
     plugins: [
       function() {
         this.plugin("done", function(stats) {
-          const cacheBustMappingPath = path.join(__dirname, "/public/dist/cache-bust-mapping/");
+          const cacheBustMappingPath = path.join(__dirname, "/dist/cache-bust-mapping/");
 
           if (!fs.existsSync(cacheBustMappingPath)) {
             fs.mkdirSync(cacheBustMappingPath);
@@ -49,20 +49,20 @@ module.exports = [
   {
     name: "additional-styles",
     entry: {
-      "loading": "./public/src/styles/stylesheets/loading.scss",
-      "no-script": "./public/src/styles/stylesheets/no-script.scss",
-      "unsupported-browser": "./public/src/styles/stylesheets/unsupported-browser.scss",
+      "loading": "./app/styles/stylesheets/loading.scss",
+      "no-script": "./app/styles/stylesheets/no-script.scss",
+      "unsupported-browser": "./app/styles/stylesheets/unsupported-browser.scss",
     },
     output: {
       filename: "[name]-[chunkhash].css",
-      path: "./public/dist/styles"
+      path: "./dist/styles"
     }, 
     plugins: [
       new ExtractTextPlugin("[name]-[chunkhash].css"),
       function() {
         this.plugin("done", function(stats) {
 
-          const cacheBustMappingPath = path.join(__dirname, "/public/dist/cache-bust-mapping/");
+          const cacheBustMappingPath = path.join(__dirname, "/dist/cache-bust-mapping/");
 
           if (!fs.existsSync(cacheBustMappingPath)) {
             fs.mkdirSync(cacheBustMappingPath);
