@@ -2,7 +2,7 @@ import * as FileSystem from "fs";
 import * as Handlebars from "handlebars";
 import * as Watch from "watch";
 
-const cacheMappingPath = "./public/dist/cache-bust-mapping/";
+const cacheMappingPath = "./dist/cache-bust-mapping/";
 
 function buildWebAppHtml() {
 
@@ -16,15 +16,15 @@ function buildWebAppHtml() {
 
     // get the content for the critical css
     const encoding = "utf-8";
-    const loadingCss = FileSystem.readFileSync("./public/dist/styles/" + cacheMap.stylesheets.loading, encoding);
+    const loadingCss = FileSystem.readFileSync("./dist/styles/" + cacheMap.stylesheets.loading, encoding);
     Handlebars.registerPartial("loading.css", loadingCss);
 
     // get the template index page
-    const file = FileSystem.readFileSync("./public/src/index.html", encoding);
+    const file = FileSystem.readFileSync("./app/index.html", encoding);
     const template = Handlebars.compile(file);
 
     // apply the cache busted file names and contents to the index page
-    FileSystem.writeFileSync("./public/dist/index.html", template(cacheMap));
+    FileSystem.writeFileSync("./dist/index.html", template(cacheMap));
 
     process.stdout.write("web app index built\n");
 }
