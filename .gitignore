@@ -19,4 +19,4 @@ coverage
 .nyc_output
 
 #Distribution code
-public/dist
+dist
