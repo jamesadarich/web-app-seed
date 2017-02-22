@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm-run-all build-scripts build-server build-web-app",
     "build-web-app": "npm-run-all build-web-app-*",
-    "build-web-app-images": "imagemin public/src/images/**/*.* --out-dir=public/dist/images",
+    "build-web-app-images": "imagemin app/images/**/*.* --out-dir=dist/images",
     "build-web-app-typescript": "webpack --optimize-minimize",
     "build-web-app-html": "node scripts/build-html",
     "build-scripts": "tsc -p ./scripts",
