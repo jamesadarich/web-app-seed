@@ -14,7 +14,7 @@ server.disable("x-powered-by");
 
 // serve up public folder
 server.use(ServeStatic(
-    "public/dist",
+    "dist",
     { 
         index: ["index.html"],
         // default cache to 1 day
@@ -35,7 +35,7 @@ server.use(ServeStatic(
 
 // serve up index as fallback for SPA
 server.get("*", (request, response) => {
-    response.sendFile("/index.html", { root: Path.join(__dirname, "../public/dist") });
+    response.sendFile("/index.html", { root: Path.join(__dirname, "../dist") });
 });
 
 // listen
