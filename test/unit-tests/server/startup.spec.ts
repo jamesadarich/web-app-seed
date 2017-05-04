@@ -1,4 +1,29 @@
-import { Expect, Test, TestFixture } from "alsatian";
+import { Expect, AsyncTest, TestFixture } from "alsatian";
+import { server } from "../../../server/startup";
+import * as request from "supertest";
+import { ServerResponse } from "http";
+
+@TestFixture("server tests")
+export class ServerTest {
+
+    @AsyncTest("x-powered-by header removed")
+    public async poweredByHeaderRemoved() {
+        return new Promise(resolve => {
+            request(server)
+                .get("/")
+                .expect((response: ServerResponse) => {
+                        try {
+                        Expect(response.getHeader("Server")).toBe("something");
+                        resolve();
+                    }
+                    catch(e) {
+                        reject(e);
+                    }
+                });
+        });
+    }
+
+}
 
 // ensure serve static setup correctly
 

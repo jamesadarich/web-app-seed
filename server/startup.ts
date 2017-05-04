@@ -18,6 +18,7 @@ server.use(ServeStatic(
     { 
         index: ["index.html"],
         // default cache to 1 day
+
         maxAge: "1d",
         // enable content based cache control
         setHeaders: (response, path) => {
@@ -42,3 +43,7 @@ server.get("*", (request, response) => {
 const portNumber: number = 3000;
 server.listen(portNumber);
 process.stdout.write("serving at port " + portNumber);
+
+export {
+    server
+};
