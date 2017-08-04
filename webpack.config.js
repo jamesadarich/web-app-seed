@@ -11,7 +11,7 @@ module.exports = [
     },
     output: {
       filename: "[name]-[chunkhash].js",
-      path: "./dist/scripts"
+      path: path.join(__dirname, "/dist/scripts")
     },
     resolve: {
       // Add `.ts` and `.tsx` as a resolvable extension.
@@ -55,7 +55,7 @@ module.exports = [
     },
     output: {
       filename: "[name]-[chunkhash].css",
-      path: "./dist/styles"
+      path: path.join(__dirname, "/dist/styles")
     }, 
     plugins: [
       new ExtractTextPlugin("[name]-[chunkhash].css"),

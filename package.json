@@ -4,7 +4,7 @@
   "description": "seed for a new web app",
   "main": "server/startup.js",
   "scripts": {
-    "build": "npm-run-all build-scripts build-server build-web-app",
+    "build": "rimraf ./dist && npm-run-all build-scripts build-server build-web-app",
     "build-web-app": "npm-run-all build-web-app-*",
     "build-web-app-images": "imagemin app/images/**/*.* --out-dir=dist/images",
     "build-web-app-typescript": "webpack --optimize-minimize",
