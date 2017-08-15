@@ -4,12 +4,17 @@
       "module": "commonjs",
       "moduleResolution": "node",
       "noImplicitAny": true,
-      "declaration": true,
+      "declaration": false,
       "sourceMap": true,
       "preserveConstEnums": true,
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
-      "newLine": "LF"
+      "newLine": "LF",
+      "lib": [
+          "es5",
+          "es2015.promise",
+          "dom"
+      ]
    },
    "buildOnSave": false,
    "compileOnSave": true,
@@ -17,7 +22,7 @@
       "./**/*.d.ts",
       "../../node_modules"
    ],
-   "filesGlob": [
+   "include": [
       "./scripts/**/*.ts"
    ],
    "atom": {

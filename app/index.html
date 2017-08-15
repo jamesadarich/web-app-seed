@@ -14,9 +14,9 @@
         </style>
 
         <!-- PAGE SCRIPTS -->
-        <script src="/scripts/{{scripts.app-startup}}" async type="text/javascript"></script>
+        <script src="/{{scripts.app-startup}}" async type="text/javascript"></script>
         <!--[if lte IE 9]>
-            <script async src="/scripts/{{scripts.legacy-app-loading}}"></script>
+            <script async src="/{{scripts.legacy-app-loading}}"></script>
         <![endif]-->
     </head>
     <body>
@@ -33,7 +33,7 @@
         </div>
         <!-- No JavaScript message -->
         <noscript>
-            <link href="/styles/{{stylesheets.no-script}}" type="text/css" rel="stylesheet" />
+            <link href="/{{styles.no-script}}" type="text/css" rel="stylesheet" />
             <div class="no-script-error">
                 <div class="error-container">
                     <span class="error-icon">
@@ -47,7 +47,7 @@
         </noscript>
         <!-- Unsupported browser message -->
         <!--[if lte IE 8]>
-            <link href="/styles/{{stylesheets.unsupported-browser}}" type="text/css" rel="stylesheet" />
+            <link href="/{{styles.unsupported-browser}}" type="text/css" rel="stylesheet" />
             <div class="unsupported-browser-error">
                 <div class="error-container">
                     <span class="error-icon">

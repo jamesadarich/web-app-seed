@@ -1,26 +1,22 @@
 import * as FileSystem from "fs";
 import * as Handlebars from "handlebars";
 import * as Watch from "watch";
+import { get } from "http";
 
-const cacheMappingPath = "./dist/cache-bust-mapping/";
+const cacheMappingPath = "./dist/";
 
-function buildWebAppHtml() {
+export async function buildWebAppHtml(stats: any) {
 
-    process.stdout.write("buliding web app index...\n");
+    process.stdout.write("building web app index...\n");
 
     // build cache busted file name maps
-    const cacheMap: any = {};
-
-    cacheMap.stylesheets = getCacheMapping("stylesheets");
-    cacheMap.scripts = getCacheMapping("scripts");
+    const cacheMap = getCacheMapping(stats.toJson());
 
     // get the content for the critical css
-    const encoding = "utf-8";
-    const loadingCss = FileSystem.readFileSync("./dist/styles/" + cacheMap.stylesheets.loading, encoding);
-    Handlebars.registerPartial("loading.css", loadingCss);
+    Handlebars.registerPartial("loading.css", await getLoadingCss(cacheMap.styles.loading));
 
     // get the template index page
-    const file = FileSystem.readFileSync("./app/index.html", encoding);
+    const file = FileSystem.readFileSync("./app/index.html", "utf-8");
     const template = Handlebars.compile(file);
 
     // apply the cache busted file names and contents to the index page
@@ -29,42 +25,66 @@ function buildWebAppHtml() {
     process.stdout.write("web app index built\n");
 }
 
-function getCacheMapping(mappingName: string) {
-    
-    // get the mapping output from the cache buster
-    const mappingConfig = JSON.parse(FileSystem.readFileSync(cacheMappingPath + mappingName + ".json", "utf-8"));
+async function getLoadingCss(loadingCssPath: string) {
+    return new Promise((resolve, reject) => {
+        FileSystem.exists("./dist/" + loadingCssPath, existsAsFile => {
+            if (existsAsFile) {
+                FileSystem.readFile("./dist/" + loadingCssPath, "utf-8", (err, data) => {
+                    resolve(data);
+                });
+            }
+            else {
+                get("http://localhost:8080/" + loadingCssPath, response => {
+                    let data = "";
+                    response.on("data", chunk => data += chunk);
+                    response.on("end", () => {
+                        resolve(data);
+                    });
+                });
+            }
+        });
+    });
+}
 
-    const mapping: { [key: string]: string} = {};
+function getCacheMapping(mappingConfig: any) {
+    const mapping: CacheBustMap = {
+        styles: {},
+        scripts: {}
+    };
 
     // map the old file names to their new ones
-    Object.keys(mappingConfig.assetsByChunkName)
-    .forEach(key => {
-        const remappedName = mappingConfig.assetsByChunkName[key];
+    mappingConfig.chunks.forEach((chunk: any) => {
+        const stylesheetName = getByExtension(chunk.files, "css");
 
-        // if the remapped name is a string then just asign it
-        if (typeof remappedName === "string") {
-            mapping[key] = remappedName; 
+        if (stylesheetName) {
+            mapping.styles[chunk.names[0]] = stylesheetName;
         }
-        // otherwise it's an array so 
         else {            
-            mapping[key] = remappedName[0]; 
+            mapping.scripts[chunk.names[0]] = getByExtension(chunk.files, "js");
         }
     });
 
     return mapping;
 }
 
-buildWebAppHtml();
+function getByExtension(files: Array<string>, extension: string) {
+    const regex = new RegExp(extension + "$");
+    const hotUpdateRegex = new RegExp("\.hot-update\." + extension + "$");
 
-// if we were told to watch
-if (process.argv.indexOf("--watch") !== -1) {
+    const matchingFiles = files.filter(file => regex.test(file) && !hotUpdateRegex.test(file));
 
-    // check out the cache busting maps and rebuild when they change
-    Watch.watchTree(cacheMappingPath,
-    {
-        filter: (path: string) => {
-            return !/\.html$/.test(path);
-        }
-    },
-    buildWebAppHtml);
+    if (matchingFiles.length === 0) {
+        return null;
+    }
+    else if (matchingFiles.length > 1) {
+        console.log(matchingFiles);
+        throw new Error(matchingFiles.length + " files matching ." + extension);
+    }
+    
+    return matchingFiles[0];
+}
+
+interface CacheBustMap {
+    scripts: { [key: string]: string };
+    styles: { [key: string]: string };
 }

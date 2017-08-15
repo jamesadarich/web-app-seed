@@ -1,85 +1,60 @@
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const fs = require("fs");
 const path = require("path");
+const fs = require("fs");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const buildPath = path.resolve(__dirname, "dist");
+const production = process.argv.indexOf("--optimize-minimize") > -1;
+const buildWebAppHtml = require("./scripts/build-html").buildWebAppHtml;
 
-module.exports = [
-  {
-    name: "app",
-    entry: {
-      "app-startup": "./app/scripts/app/startup.ts",
-      "legacy-app-loading": "./app/scripts/app-loading/legacy-app-loading.ts"
-    },
-    output: {
-      filename: "[name]-[chunkhash].js",
-      path: path.join(__dirname, "/dist/scripts")
-    },
-    resolve: {
-      // Add `.ts` and `.tsx` as a resolvable extension.
-      extensions: [".ts", ".tsx", ".js"] // note if using webpack 1 you"d also need a "" in the array as well
-    },
-    plugins: [
-      function() {
-        this.plugin("done", function(stats) {
-          const cacheBustMappingPath = path.join(__dirname, "/dist/cache-bust-mapping/");
-
-          if (!fs.existsSync(cacheBustMappingPath)) {
-            fs.mkdirSync(cacheBustMappingPath);
-          }
-
-          fs.writeFileSync(cacheBustMappingPath + "scripts.json",
-            JSON.stringify(stats.toJson()));
-          });
-      }
-    ],
-    module: {
-      loaders: [ 
-        // loaders will work with webpack 1 or 2; but will be renamed "rules" in future
-        // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
-        { 
-          "test": /\.tsx?$/,
-          loader: "ts-loader"
-        },
-        {
-          test: /\.scss$/,
-          loaders: [ "style-loader", "css-loader", "sass-loader" ]
-        }
-      ]
-    }
+module.exports = {
+  entry: {
+    "app-startup": "./app/scripts/app/startup.ts",
+    "legacy-app-loading": "./app/scripts/app-loading/legacy-app-loading.ts",
+    "loading": "./app/styles/stylesheets/loading.scss",
+    "no-script": "./app/styles/stylesheets/no-script.scss",
+    "unsupported-browser": "./app/styles/stylesheets/unsupported-browser.scss",
   },
-  {
-    name: "additional-styles",
-    entry: {
-      "loading": "./app/styles/stylesheets/loading.scss",
-      "no-script": "./app/styles/stylesheets/no-script.scss",
-      "unsupported-browser": "./app/styles/stylesheets/unsupported-browser.scss",
-    },
-    output: {
-      filename: "[name]-[chunkhash].css",
-      path: path.join(__dirname, "/dist/styles")
-    }, 
-    plugins: [
-      new ExtractTextPlugin("[name]-[chunkhash].css"),
-      function() {
-        this.plugin("done", function(stats) {
-
-          const cacheBustMappingPath = path.join(__dirname, "/dist/cache-bust-mapping/");
-
-          if (!fs.existsSync(cacheBustMappingPath)) {
-            fs.mkdirSync(cacheBustMappingPath);
-          }
-
-          fs.writeFileSync(cacheBustMappingPath + "stylesheets.json",
-            JSON.stringify(stats.toJson()));
-          });
+  output: {
+    path: buildPath,
+    filename: production ? "scripts/[name]-[chunkhash].js" : "scripts/[name]-[hash].js",
+    publicPath: "/"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+            "style-loader",
+            "css-loader"
+        ],
+        exclude: /node_modules/
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [ "css-loader", "sass-loader" ]
+        }),
+        exclude: /node_modules/
+      },
+      {
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/
       }
-    ],
-    module: {
-      loaders: [ 
-        {
-          test: /\.scss$/,
-          use: ExtractTextPlugin.extract([ "css-loader", "sass-loader" ])
-        }
-      ]
+    ]
+  },
+  resolve: {
+    extensions: [".tsx", ".ts", ".js"]
+  },
+  plugins: [
+    new ExtractTextPlugin({
+      filename: production ? "styles/[name]-[chunkhash].css" : "styles/[name]-[hash].css",
+    }),
+    function() {
+      this.plugin("done", buildWebAppHtml);
     }
+  ],
+  devServer: {
+    contentBase: buildPath
   }
-]
+};
