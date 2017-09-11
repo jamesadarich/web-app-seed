@@ -17,10 +17,7 @@
       "./**/*.d.ts",
       "../node_modules"
    ],
-   "filesGlob": [
+   "include": [
       "./**/*.ts"
-   ],
-   "atom": {
-      "rewriteTsconfig": false
-   }
+   ]
 }

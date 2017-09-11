@@ -1,7 +1,7 @@
 // IE 9 loading animation fallback
 
 // when the DOM is done loading
-document.addEventListener("DOMContentLoaded", (event) => {
+document.addEventListener("DOMContentLoaded", () => {
 
     // get the element that lets the user know we're loading the app
     const appLoadingNotifcationElement = document.querySelector(".app-loading-notification");

@@ -1,6 +1,6 @@
 {
    "compilerOptions": {
-      "target": "es5",
+      "target": "es6",
       "module": "commonjs",
       "moduleResolution": "node",
       "noImplicitAny": true,
@@ -17,10 +17,7 @@
       "./**/*.d.ts",
       "../node_modules"
    ],
-   "filesGlob": [
+   "include": [
       "./**/*.ts"
-   ],
-   "atom": {
-      "rewriteTsconfig": false
-   }
+   ]
 }

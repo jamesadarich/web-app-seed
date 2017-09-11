@@ -18,6 +18,14 @@
         <!--[if lte IE 9]>
             <script async src="/{{scripts.legacy-app-loading}}"></script>
         <![endif]-->
+
+        <!-- OFFLINE SUPPORT -->        
+        <script src="/{{scripts.register-service-worker}}" async type="text/javascript"></script>
+        <!-- INSTALLABLE ON MOBILE -->
+        <link rel="manifest" href="/manifest.json">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="theme-color" content="{{colors.theme}}">
     </head>
     <body>
         <!-- App loading notification -->
