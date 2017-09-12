@@ -39,24 +39,45 @@ export async function buildWebAppHtml(stats: any) {
     catch (error) {
         console.log("failed to build manifest:", error.message);
     }
+    
+    await copyFile("./dist/scripts/" + settings.scripts["service-worker"], "./dist/" + settings.scripts["service-worker"]);
 
     process.stdout.write("web app index built\n");
 }
 
 async function updateFileReferences(settings: SettingsMap, sourcePath: string, destinationPath: string) {
-    return new Promise<void>((resolve, reject) => {
+    const file = await readFileAsync(sourcePath);
+    const template = Handlebars.compile(file);
+    await writeFile(destinationPath, template(settings));
+}
+
+async function copyFile(sourcePath: string, destinationPath: string) {
+    const file = await readFileAsync(sourcePath);
+    await writeFile(destinationPath, file);
+}
+
+async function readFileAsync(sourcePath: string) {
+    return new Promise((resolve, reject) => {
         readFile(sourcePath, "utf-8", (error, file) => {
             if (error) {
-                return reject(error);
+                reject(error);
             }
-            const template = Handlebars.compile(file);
-            writeFile(destinationPath, template(settings), error => {
-                if (error) {
-                    return reject(error);
-                }
-                
+            else {
+                resolve(file);
+            }
+        });
+    });
+}
+
+async function writeFileAsync(destinationPath: string, contents: string) {
+    return new Promise((resolve, reject) => {
+        writeFile(destinationPath, contents, error => {
+            if (error) {
+                reject(error);
+            }
+            else {
                 resolve();
-            });
+            }
         });
     });
 }
@@ -102,6 +123,10 @@ function getSettingsMapping(mappingConfig: any) {
             mapping.scripts[chunk.names[0]] = getByExtension(chunk.files, "js");
         }
     });
+
+    // ensure service worker is at root level
+    const serviceWorkerPaths = mapping.scripts["service-worker"].split("/");
+    mapping.scripts["service-worker"] = serviceWorkerPaths[serviceWorkerPaths.length - 1];
 
     return mapping;
 }
