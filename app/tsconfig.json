@@ -10,6 +10,7 @@
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
       "newLine": "LF",
+      "jsx": "react",
       "lib": [
           "es5",
           "es2015.promise",
@@ -24,7 +25,8 @@
       "../../node_modules"
    ],
    "include": [
-      "./scripts/**/*.ts"
+      "./scripts/**/*.ts",
+      "./scripts/**/*.tsx"
    ],
    "atom": {
       "rewriteTsconfig": false

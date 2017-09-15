@@ -59,6 +59,7 @@ module.exports = {
   devServer: {
     compress: true,
     contentBase: buildPath,
+    historyApiFallback: true,
     port: 3000
   }
 };
