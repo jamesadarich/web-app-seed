@@ -31,7 +31,7 @@ self.addEventListener("install", (event: any) => {
   async function createServiceWorkerInstaller() {
     console.log("add to cache");
     const cache = await caches.open(CACHE_NAME);
-    await cache.addAll([ "/*" ]);
+    await cache.addAll([ "/", "/*" ]);
     console.log("cached", cache);
   }
   if (doCache) {

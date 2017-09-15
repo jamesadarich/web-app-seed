@@ -91,7 +91,7 @@ async function getLoadingCss(loadingCssPath: string) {
                 });
             }
             else {
-                get("http://localhost:8080/" + loadingCssPath, response => {
+                get("http://localhost:3000/" + loadingCssPath, response => {
                     let data = "";
                     response.on("data", chunk => data += chunk);
                     response.on("end", () => {

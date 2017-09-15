@@ -14,7 +14,7 @@
     "dev": "npm-run-all build-scripts dev-web-app",
     "dev-web-app": "npm-run-all --parallel expose-to-networked-devices build-web-app-images dev-web-app-*",
     "dev-web-app-assets": "webpack-dev-server --hot --devtool source-map",
-    "expose-to-networked-devices": "browser-sync start --proxy localhost:8080 --files \"css/*.css\"",
+    "expose-to-networked-devices": "browser-sync start --proxy localhost:3000 --files \"css/*.css\"",
     "init-solution": "npm run build-scripts && node ./scripts/initialize-solution.js",
     "review": "npm run review-typescript & npm run review-sass",
     "review-typescript": "tslint \"**/*.ts\" \"**/*.tsx\" --exclude \"**/*.d.ts\" --exclude \"node_modules/**/*.*\"",

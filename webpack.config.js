@@ -57,6 +57,8 @@ module.exports = {
     }
   ],
   devServer: {
-    contentBase: buildPath
+    compress: true,
+    contentBase: buildPath,
+    port: 3000
   }
 };
