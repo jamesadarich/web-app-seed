@@ -1,11 +1,10 @@
 import * as React from "react";
-import { Button } from "../feel-ui/button";
-import { Link, BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Route } from "react-router";
 import { ConnectedRouter, routerReducer, routerMiddleware } from "react-router-redux";
 import createHistory from "history/createBrowserHistory";
+import { MenuComponent } from "./navigation/menu-component";
 
 //import reducers from '<project-path>/reducers'
 
@@ -27,23 +26,16 @@ const store = createStore(
 
 export class AppComponent extends React.Component<any, {}> {
     public render() {
-        return <div>        
-                    <Provider store={store}>
-                        { /* Tell the Router to use our enhanced history */ }
-                        <ConnectedRouter history={history}>
-                            <div>
-                                <nav>
-                                    <Link to="/">Home</Link>
-                                    <Link to="/test">Test</Link>
-                                </nav>
-                                <h1>Startup successful</h1>
-                                <Button>Click me</Button>
-                                <Route path="/" exact component={Home}/>
-                                <Route path="/test" component={Test}/>
-                            </div>
-                        </ConnectedRouter>
-                    </Provider>
-                </div>;
+        return <Provider store={store}>
+                    { /* Tell the Router to use our enhanced history */ }
+                    <ConnectedRouter history={history}>
+                        <div>
+                            <MenuComponent />
+                            <Route path="/" exact component={Home}/>
+                            <Route path="/test" component={Test}/>
+                        </div>
+                    </ConnectedRouter>
+                </Provider>;
     }
 }
 
