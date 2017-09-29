@@ -375,3 +375,68 @@ input {
         }
     }
 }
+
+.toggle-button {
+    border-radius: 0;
+    border: darken($primary-color, 20%) solid 1px;
+
+    &.on {
+        background: darken($primary-color, 20%);
+    }
+}
+
+.notification-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    
+    .notification {
+        background: black;
+        color: white;
+        margin: 1rem;
+        padding: 1rem;
+    }
+}
+
+
+.progress-bar-container {
+    height: 0.25rem;
+    border-radius: 0.125rem;
+    background: #666;
+
+    .progress-bar {
+        background: $primary-color;
+        height: 100%;
+        transition: width 0.4s ease;
+    }
+}
+
+.gallery {
+    .focussed-image {
+        height: 18em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            max-height: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .thumbnail-list {
+        padding: 1em;
+        overflow: auto;
+        display: flex;
+
+        .thumbnail {
+            margin: 1em;
+            display: inline-block;
+            
+            img {
+                height: 6em;
+                cursor: pointer;
+            }
+        }
+    }
+}

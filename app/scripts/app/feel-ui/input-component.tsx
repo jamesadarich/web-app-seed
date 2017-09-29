@@ -25,8 +25,6 @@ export class InputComponent extends React.Component<any, any> {
         props.model[props.propertyName] = event.target.value;
 
         this.setState({ errors: validate(props.model, props.propertyName) });
-
-        console.log("CHANGE", props.form);
     }
 
     public render() {
