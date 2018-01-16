@@ -136,9 +136,12 @@ class Components extends React.Component<any, any> {
         this.state = {
             progress: 0
         };
+    }
+
+    public componentDidMount() {        
 
         setInterval(() => {
-
+            
             if (this.state.progress === 100) {
                 this.setState({
                     progress: 0
@@ -196,7 +199,7 @@ class Components extends React.Component<any, any> {
                     </TableComponent>
                     <h2>Graphs</h2>
                     <h2>Input</h2>
-                    <InputComponent labelText="Something" name="something" model={(window as any).model} propertyName="test" />
+                    <InputComponent labelText="Something" name="something" model={dogs[0].name} propertyName="givenName" />
                     <h2>Date Picker</h2>
                     <h2>Reorder List</h2>
                     <h2>Flex Container</h2>
@@ -246,10 +249,15 @@ class Components extends React.Component<any, any> {
                     <ProgressBarComponent progress={this.state.progress} max={100} />
                     <h2>When in viewport</h2>
                     <h2>Form</h2>
-                    <FormComponent onSubmit={(e: any) => { e.preventDefault(); isValid((window as any).model) ? console.log("submitted", (window as any).model) : console.log("failed validation")}}>
+                    <FormComponent onSubmit={(e: any) => submitForm(e)}>
                         <InputComponent labelText="Something" name="something" model={(window as any).model} propertyName="test" />
                         <ButtonComponent type="submit">Submit</ButtonComponent>
                     </FormComponent>
                 </ContentContainerComponent>;
     }
+}
+
+function submitForm(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    isValid((window as any).model) ? console.log("submitted", (window as any).model) : console.log("failed validation");
 }

@@ -24,5 +24,3 @@ export class CheckboxComponent extends React.Component<any, any> {
                 </div>;
     }
 }
-
-                    

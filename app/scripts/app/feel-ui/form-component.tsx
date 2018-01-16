@@ -5,10 +5,9 @@ export class FormComponent extends React.Component<any, any> {
     public render() {
         const { props } = this;
 
-        const children = React.Children.toArray(props.children)
-                                       .map(child => typeof child === "string" ||  typeof child === "number" ? child : React.cloneElement(child, { form: this }));
+        const children = React.Children.map(props.children, child => typeof child === "string" ||  typeof child === "number" ? child : React.cloneElement(child, { form: this }));
 
-        return  <form onSubmit={this.props.onSubmit}>
+        return  <form onSubmit={props.onSubmit}>
                     {children}
                 </form>;
     }

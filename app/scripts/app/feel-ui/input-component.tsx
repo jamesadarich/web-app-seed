@@ -15,7 +15,8 @@ export class InputComponent extends React.Component<any, any> {
         super(props);
 
         this.state = {
-            errors: []
+            errors: [],
+            value: props.model[props.propertyName]
         };
     }
 
@@ -24,7 +25,10 @@ export class InputComponent extends React.Component<any, any> {
 
         props.model[props.propertyName] = event.target.value;
 
-        this.setState({ errors: validate(props.model, props.propertyName) });
+        this.setState({
+            errors: validate(props.model, props.propertyName),
+            value: props.model[props.propertyName]
+        });
     }
 
     public render() {
@@ -33,7 +37,7 @@ export class InputComponent extends React.Component<any, any> {
         const name = props.name || props.propertyName;
 
         return <FormFieldComponent labelText={props.labelText} name={name} errors={this.state.errors}>
-                    <input type={props.type || "text"} disabled={props.disabled} name={name} id={name} onChange={(e) => this._handleChange(e)} />
+                    <input type={props.type || "text"} disabled={props.disabled} name={name} id={name} onChange={(e) => this._handleChange(e)} value={this.state.value} />
                </FormFieldComponent>;
     }
 }
