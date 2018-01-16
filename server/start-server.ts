@@ -9,6 +9,17 @@ export async function startServer(app: Application) {
     const portNumber: number = 3000;
     const securePortNumber: number = 4300;
 
+    // security headers
+    app.use((request, response, next) => {
+        response.removeHeader("X-Powered-By");
+        response.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+        response.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+        response.setHeader("X-XSS-Protection", "1; mode=block");
+        response.setHeader("X-Frame-Options", "SAMEORIGIN");
+        response.setHeader("X-Content-Type-Options", "nosniff");
+        next();
+    });
+
     // https only
     app.use((request, response, next) => {
         if (request.secure) {            
@@ -18,16 +29,6 @@ export async function startServer(app: Application) {
             const httpsRedirectUrl = `https://${request.headers.host.replace(portNumber, securePortNumber)}${request.path}`;
             response.redirect(301, httpsRedirectUrl);
         }
-    });
-
-    // security headers
-    app.use((request, response, next) => {
-        response.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
-        response.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
-        response.setHeader("X-XSS-Protection", "1; mode=block");
-        response.setHeader("X-Frame-Options", "SAMEORIGIN");
-        response.setHeader("X-Content-Type-Options", "nosniff");
-        next();
     });
 
     // serve up public folder

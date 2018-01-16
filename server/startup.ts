@@ -8,8 +8,5 @@ const app = Express();
 // setup compression
 app.use(Compression());
 
-// don't expose x-powered-by express header
-app.disable("x-powered-by");
-
 // listen
 startServer(app);
