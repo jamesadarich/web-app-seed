@@ -12,14 +12,14 @@ export class RadioButtonGroupComponent extends React.Component<any, any> {
     private _handleSelect(selectedItem: any) {       
 
         this.setState({
-            selectedItem: selectedItem
+            selectedIndex: this.props.items.indexOf(selectedItem)
         });
     }
 
     public render() {
         return  <div className="radio-button-group">
                     {this.props.items.map((item: any, index: number) => 
-                        <RadioButtonComponent onSelect={() => this._handleSelect(item)} checked={item === this.state.selectedItem} key={index} >
+                        <RadioButtonComponent onSelect={() => this._handleSelect(item)} checked={index === this.state.selectedIndex} key={index} >
                             <span>{item.label}</span>
                         </RadioButtonComponent>)}
                 </div>;
