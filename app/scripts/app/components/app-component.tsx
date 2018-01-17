@@ -249,7 +249,7 @@ class Components extends React.Component<any, any> {
                     <ProgressBarComponent progress={this.state.progress} max={100} />
                     <h2>When in viewport</h2>
                     <h2>Form</h2>
-                    <FormComponent onSubmit={(e: any) => submitForm(e)}>
+                    <FormComponent onSubmit={submitForm}>
                         <InputComponent labelText="Something" name="something" model={(window as any).model} propertyName="test" />
                         <ButtonComponent type="submit">Submit</ButtonComponent>
                     </FormComponent>
