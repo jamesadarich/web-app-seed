@@ -12,6 +12,10 @@ export async function startServer(app: Application) {
     // security headers
     app.use((request, response, next) => {
         response.removeHeader("X-Powered-By");
+
+        // need to confirm this but this should work lovely
+        // example of how hash should look noted here -> https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/style-src#Unsafe_inline_styles
+        // response.setHeader("Content-Security-Policy", "default-src self style-src {hash-of-loading-styles}");
         response.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
         response.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
         response.setHeader("X-XSS-Protection", "1; mode=block");
