@@ -5,10 +5,7 @@ import * as ServeStatic from "serve-static";
 import { Application } from "express";
 import { generateCertificate } from "./generate-certificate";
 
-export async function startServer(app: Application) {  
-    const portNumber: number = 3000;
-    const securePortNumber: number = 4300;
-
+export async function startServer(app: Application) {
     // security headers
     app.use((request, response, next) => {
         response.removeHeader("X-Powered-By");
@@ -16,23 +13,12 @@ export async function startServer(app: Application) {
         // need to confirm this but this should work lovely
         // example of how hash should look noted here -> https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/style-src#Unsafe_inline_styles
         // response.setHeader("Content-Security-Policy", "default-src self style-src {hash-of-loading-styles}");
-        response.setHeader("Strict-Transport-Security", "max-age=31536000; includeSubDomains");
+        response.setHeader("Strict-Transport-Security", "max-age=31536000;");
         response.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
         response.setHeader("X-XSS-Protection", "1; mode=block");
         response.setHeader("X-Frame-Options", "SAMEORIGIN");
         response.setHeader("X-Content-Type-Options", "nosniff");
         next();
-    });
-
-    // https only
-    app.use((request, response, next) => {
-        if (request.secure) {            
-            next();
-        }
-        else {
-            const httpsRedirectUrl = `https://${request.headers.host.replace(portNumber.toFixed(0), securePortNumber.toFixed(0))}${request.path}`;
-            response.redirect(301, httpsRedirectUrl);
-        }
     });
 
     // serve up public folder
@@ -64,11 +50,10 @@ export async function startServer(app: Application) {
         response.sendFile("/index.html", { root: Path.join(__dirname, "../dist") });
     });
 
-    const sslDetails = await generateCertificate();
-
     const httpServer = Http.createServer(app);
-    const httpsServer = Https.createServer({ key: sslDetails.serviceKey, cert: sslDetails.certificate }, app);
-    httpServer.listen(portNumber);
-    httpsServer.listen(securePortNumber);
-    process.stdout.write("serving at port " + portNumber + " and https at " + securePortNumber);
+
+    const port = process.env.PORT || 4000;
+
+    httpServer.listen(port);
+    process.stdout.write("serving at port " + port);
 }
