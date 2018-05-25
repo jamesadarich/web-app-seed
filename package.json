@@ -44,7 +44,7 @@
     "@types/history": "^4.6.0",
     "@types/node": "^6.0.52",
     "@types/pem": "^1.9.2",
-    "@types/react": "^16.0.5",
+    "@types/react": "^15.6.15",
     "@types/react-dom": "^15.5.4",
     "@types/react-redux": "^5.0.8",
     "@types/react-router": "^4.0.15",
@@ -76,6 +76,7 @@
     "webpack-dev-server": "^2.7.1"
   },
   "dependencies": {
+    "@justaddjam/strawberry": "^0.6.0",
     "compression": "^1.6.2",
     "express": "^4.14.0",
     "history": "^4.7.2",

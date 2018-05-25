@@ -30,7 +30,7 @@ export async function startServer(app: Application) {
             next();
         }
         else {
-            const httpsRedirectUrl = `https://${request.headers.host.replace(portNumber, securePortNumber)}${request.path}`;
+            const httpsRedirectUrl = `https://${request.headers.host.replace(portNumber.toFixed(0), securePortNumber.toFixed(0))}${request.path}`;
             response.redirect(301, httpsRedirectUrl);
         }
     });
@@ -44,12 +44,14 @@ export async function startServer(app: Application) {
             maxAge: "1d",
             // enable content based cache control
             setHeaders: (response, path) => {
+
+                const mimeType = (ServeStatic.mime as any).lookup(path);
                 
-                if (ServeStatic.mime.lookup(path) === "text/html") {
+                if (mimeType === "text/html") {
                     // don't cache html
                     response.setHeader("Cache-Control", "no-cache");
                 }
-                else if (/\/(css|javascript)$/.test(ServeStatic.mime.lookup(path))) {
+                else if (/\/(css|javascript)$/.test(mimeType)) {
                     // cache css and javascript for a year as we bust it automatically
                     response.setHeader("Cache-Control", "public, max-age=31536000");
                 }

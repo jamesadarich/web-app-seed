@@ -83,7 +83,7 @@ async function writeFileAsync(destinationPath: string, contents: string) {
 }
 
 async function getLoadingCss(loadingCssPath: string) {
-    return new Promise((resolve, reject) => {
+    return new Promise<any>((resolve, reject) => {
         exists("./dist/" + loadingCssPath, existsAsFile => {
             if (existsAsFile) {
                 readFile("./dist/" + loadingCssPath, "utf-8", (err, data) => {
