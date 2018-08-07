@@ -8,7 +8,7 @@ export class ServerTest {
 
     @AsyncTest("x-powered-by header removed")
     public async poweredByHeaderRemoved() {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             request(server)
                 .get("/")
                 .expect((response: ServerResponse) => {

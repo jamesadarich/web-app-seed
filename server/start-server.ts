@@ -1,9 +1,7 @@
 import * as Http from "http";
-import * as Https from "https";
 import * as Path from "path";
 import * as ServeStatic from "serve-static";
 import { Application } from "express";
-import { generateCertificate } from "./generate-certificate";
 
 export async function startServer(app: Application) {
     // security headers

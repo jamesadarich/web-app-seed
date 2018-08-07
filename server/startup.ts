@@ -10,3 +10,7 @@ app.use(Compression());
 
 // listen
 startServer(app);
+
+export {
+    app as server
+};
