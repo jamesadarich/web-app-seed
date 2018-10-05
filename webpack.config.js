@@ -60,6 +60,7 @@ module.exports = {
     compress: true,
     contentBase: buildPath,
     historyApiFallback: true,
-    port: 3000
+    port: 3000,
+    public: "webappseed.localtunnel.me"
   }
 };
