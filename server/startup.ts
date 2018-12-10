@@ -1,16 +1,12 @@
-import * as Compression from "compression";
-import * as Express from "express";
+import * as express from "express";
 import { startServer } from "./start-server";
 
 // create server
-const app = Express();
-
-// setup compression
-app.use(Compression());
+const server = express();
 
 // listen
-startServer(app);
+startServer(server);
 
 export {
-    app as server
+    server
 };

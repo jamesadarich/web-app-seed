@@ -4,6 +4,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const buildPath = path.resolve(__dirname, "dist");
 const production = process.argv.indexOf("--optimize-minimize") > -1;
 const buildWebAppHtml = require("./scripts/build-html").buildWebAppHtml;
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -49,6 +50,9 @@ module.exports = {
     extensions: [".tsx", ".ts", ".js"]
   },
   plugins: [
+    new CompressionPlugin({
+      filename: "[path][query]"
+    }),
     new ExtractTextPlugin({
       filename: production ? "styles/[name]-[chunkhash].css" : "styles/[name]-[hash].css",
     }),

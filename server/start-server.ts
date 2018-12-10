@@ -38,6 +38,7 @@ export async function startServer(app: Application) {
                 else if (/\/(css|javascript)$/.test(mimeType)) {
                     // cache css and javascript for a year as we bust it automatically
                     response.setHeader("Cache-Control", "public, max-age=31536000");
+                    response.setHeader("Content-Encoding", "gzip");
                 }
             }
         })
