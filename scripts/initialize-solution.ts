@@ -5,7 +5,7 @@ async function initializeSolution() {
     const appName = await requestUserInput("Choose your app name");
     const somethingElse = await requestUserInput("Something else");
     const anotherThing = await requestUserInput("Another thing");
-    console.log("\nappName:", appName, "\nsometihngElse:", somethingElse, "\nanotherThing:", anotherThing);
+    process.stdout.write(`\nappName: ${appName}\nsometihngElse: ${somethingElse}\nanotherThing: ${anotherThing}`);
     process.exit(0);
 }
 

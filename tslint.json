@@ -14,6 +14,7 @@
      "arrow-parens": false,
      "max-classes-per-file": false, // allow private classes
      "one-line": [ true, "check-open-brace", "check-whitespace"],
+     "interface-name": [ true, "never-prefix" ],
      "trailing-comma": false,
      "variable-name": [true, "ban-keywords", "check-format", "allow-leading-underscore"]
   },

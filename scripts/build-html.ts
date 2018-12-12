@@ -1,6 +1,5 @@
 import { exists, readFile, writeFile } from "fs";
 import * as Handlebars from "handlebars";
-import * as Watch from "watch";
 import { get } from "http";
 
 const cacheMappingPath = "./dist/";
@@ -20,27 +19,16 @@ export async function buildWebAppHtml(stats: any) {
         await updateFileReferences(settings, "./app/index.html", "./dist/index.html");
     }
     catch (error) {
-        console.log("failed to build index:", error.message);
+        process.stdout.write("failed to build index: " + error.message);
     }
-    
-    try {
-        const registerServiceWorkerPath = "dist/" + settings.scripts["register-service-worker"];
-        // apply the cache busted file names to register service worker
-        await updateFileReferences(settings, registerServiceWorkerPath, registerServiceWorkerPath);
-    }
-    catch (error) {
-        console.log("failed to register service worker:", error.message);
-    }
-    
+
     try {
         // apply the cache busted file names and contents to the index page
         await updateFileReferences(settings, "./app/manifest.json", "./dist/manifest.json");
     }
     catch (error) {
-        console.log("failed to build manifest:", error.message);
+        process.stdout.write("failed to build manifest: " + error.message);
     }
-    
-    await copyFile("./dist/scripts/" + settings.scripts["service-worker"], "./dist/" + settings.scripts["service-worker"]);
 
     process.stdout.write("web app index built\n");
 }
@@ -105,11 +93,11 @@ async function getLoadingCss(loadingCssPath: string) {
 
 function getSettingsMapping(mappingConfig: any) {
     const mapping: SettingsMap = {
-        styles: {},
-        scripts: {},
         colors: {
             theme: "#00bcd4"
-        }
+        },
+        scripts: {},
+        styles: {}
     };
 
     // map the old file names to their new ones
@@ -119,14 +107,10 @@ function getSettingsMapping(mappingConfig: any) {
         if (stylesheetName) {
             mapping.styles[chunk.names[0]] = stylesheetName;
         }
-        else {            
+        else {
             mapping.scripts[chunk.names[0]] = getByExtension(chunk.files, "js");
         }
     });
-
-    // ensure service worker is at root level
-    const serviceWorkerPaths = mapping.scripts["service-worker"].split("/");
-    mapping.scripts["service-worker"] = serviceWorkerPaths[serviceWorkerPaths.length - 1];
 
     return mapping;
 }
@@ -141,10 +125,10 @@ function getByExtension(files: Array<string>, extension: string) {
         return null;
     }
     else if (matchingFiles.length > 1) {
-        console.log(matchingFiles);
+        process.stdout.write(matchingFiles.join(" "));
         throw new Error(matchingFiles.length + " files matching ." + extension);
     }
-    
+
     return matchingFiles[0];
 }
 

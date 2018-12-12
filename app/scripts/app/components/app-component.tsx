@@ -1,9 +1,9 @@
-import * as React from "react";
-import { Provider } from "react-redux";
-import { createStore, combineReducers, applyMiddleware } from "redux";
-import { Route } from "react-router";
-import { ConnectedRouter, routerReducer, routerMiddleware } from "react-router-redux";
-import createHistory from "history/createBrowserHistory";
+import { FlexFillRemainderComponent } from "@justaddjam/strawberry";
+import { GalleryComponent } from "@justaddjam/strawberry";
+import { ProgressBarComponent } from "@justaddjam/strawberry";
+import { SearchComponent } from "@justaddjam/strawberry";
+import { RangeComponent } from "@justaddjam/strawberry";
+import { notify } from "@justaddjam/strawberry";
 import { MenuComponent } from "@justaddjam/strawberry";
 import { MenuItemComponent } from "@justaddjam/strawberry";
 import { ContentContainerComponent } from "@justaddjam/strawberry";
@@ -15,7 +15,7 @@ import { TableComponent } from "@justaddjam/strawberry";
 import { TableColumnComponent } from "@justaddjam/strawberry";
 import { CollapsibleSectionComponent } from "@justaddjam/strawberry";
 import { FlexContainer } from "@justaddjam/strawberry";
-import { FlexFillRemainderComponent } from "@justaddjam/strawberry";
+import { MultiSelectToggleButtonGroupComponent } from "@justaddjam/strawberry";
 import { RadioButtonComponent } from "@justaddjam/strawberry";
 import { RadioButtonGroupComponent } from "@justaddjam/strawberry";
 import { CheckboxComponent } from "@justaddjam/strawberry";
@@ -26,34 +26,31 @@ import { InputComponent } from "@justaddjam/strawberry";
 import { SliderComponent } from "@justaddjam/strawberry";
 import { SwitchComponent } from "@justaddjam/strawberry";
 import { ToggleButtonGroupComponent } from "@justaddjam/strawberry";
-import { MultiSelectToggleButtonGroupComponent } from "@justaddjam/strawberry";
-import { notify } from "@justaddjam/strawberry";
-import { RangeComponent } from "@justaddjam/strawberry";
-import { SearchComponent } from "@justaddjam/strawberry";
-import { ProgressBarComponent } from "@justaddjam/strawberry";
-import { GalleryComponent } from "@justaddjam/strawberry";
+import createHistory from "history/createBrowserHistory";
+import * as React from "react";
+import { Provider } from "react-redux";
+import { Route } from "react-router";
+import { ConnectedRouter, routerMiddleware, routerReducer } from "react-router-redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
 
 function isValid(model: any) {
     return !!model.test;
 }
 
-//import reducers from '<project-path>/reducers'
-
 // Create a history of your choosing (we're using a browser history in this case)
-const history = createHistory()
+const history = createHistory();
 
 // Build the middleware for intercepting and dispatching navigation actions
-const middleware = routerMiddleware(history)
+const middleware = routerMiddleware(history);
 
 // Add the reducer to your store on the `router` key
 // Also apply our middleware for navigating
 const store = createStore(
   combineReducers({
-    //...reducers,
     router: routerReducer
   }),
   applyMiddleware(middleware)
-)
+);
 
 export class AppComponent extends React.Component<any, {}> {
     public render() {
@@ -88,46 +85,52 @@ class Home extends React.Component {
 
 const dogs = [
     {
+        avatar: "https://media.giphy.com/media/bOmXDVQAR7gaY/giphy.gif",
         name: {
-            givenName: "Sleepy",
-            familyName: "Puppy"
-        },
-        avatar: "https://media.giphy.com/media/bOmXDVQAR7gaY/giphy.gif"
-    },            
+            familyName: "Puppy",
+            givenName: "Sleepy"
+        }
+    },
     {
+        avatar: "https://media.giphy.com/media/12MY94aT1qTFjW/giphy.gif",
         name: {
-            givenName: "Adventurous",
-            familyName: "Puppy"
-        },
-        avatar: "https://media.giphy.com/media/12MY94aT1qTFjW/giphy.gif"
-    },            
+            familyName: "Puppy",
+            givenName: "Adventurous"
+        }
+    },
     {
+        avatar: "https://media.giphy.com/media/tG6ZDOfW5Xeo/giphy.gif",
         name: {
-            givenName: "Excited",
-            familyName: "Puppy"
-        },
-        avatar: "https://media.giphy.com/media/tG6ZDOfW5Xeo/giphy.gif"
+            familyName: "Puppy",
+            givenName: "Excited"
+        }
     }
 ];
 
 async function search(query: string) {
-    
+
     const searchQuery = new RegExp(`(${query.replace(/\s+/, "|")})`, "i");
 
     return new Promise((resolve) => {
-        setTimeout(() => resolve(dogs.filter(dog => dog.name.familyName.match(searchQuery) ||  dog.name.givenName.match(searchQuery))), 500)
+        setTimeout(() => {
+            return resolve(dogs.filter(dog => {
+                return dog.name.familyName.match(searchQuery) ||  dog.name.givenName.match(searchQuery);
+            }));
+        }, 500);
     });
 }
 
 class SearchResultComponent extends React.Component<any, any> {
     public render() {
         return <FlexContainer>
-                    <img src={this.props.result.avatar} style={ { width: "3rem", height: "3rem", borderRadius: "50%", margin: "0.5rem"}} />
-                    <FlexFillRemainderComponent>{this.props.result.name.familyName}, {this.props.result.name.givenName}</FlexFillRemainderComponent>
-               </FlexContainer>
+                    <img src={this.props.result.avatar}
+                         style={ { width: "3rem", height: "3rem", borderRadius: "50%", margin: "0.5rem"}} />
+                    <FlexFillRemainderComponent>
+                        {this.props.result.name.familyName}, {this.props.result.name.givenName}
+                    </FlexFillRemainderComponent>
+               </FlexContainer>;
     }
 }
-
 
 class Components extends React.Component<any, any> {
     public constructor() {
@@ -138,10 +141,10 @@ class Components extends React.Component<any, any> {
         };
     }
 
-    public componentDidMount() {        
+    public componentDidMount() {
 
         setInterval(() => {
-            
+
             if (this.state.progress === 100) {
                 this.setState({
                     progress: 0
@@ -183,12 +186,24 @@ class Components extends React.Component<any, any> {
                         <p>Awesome Checkbox</p>
                     </CheckboxComponent>
                     <h2>Radio</h2>
-                    <RadioButtonGroupComponent items={[{ label: "something" }, { label: "something else" }, { label: "another thing" }]} />
+                    <RadioButtonGroupComponent items={[
+                        { label: "something" },
+                        { label: "something else" },
+                        { label: "another thing" }
+                    ]} />
                     <h2>Toggle Buttons</h2>
                     <h3>Single select</h3>
-                    <ToggleButtonGroupComponent options={[ { label: "one" }, { label: "two" }, { label: "three" }  ]}/>
+                    <ToggleButtonGroupComponent options={[
+                        { label: "one" },
+                        { label: "two" },
+                        { label: "three" }
+                    ]}/>
                     <h3>Multi select</h3>
-                    <MultiSelectToggleButtonGroupComponent options={[ { label: "one", selected: true }, { label: "two" }, { label: "three", selected: true }  ]} />
+                    <MultiSelectToggleButtonGroupComponent options={[
+                        { label: "one", selected: true },
+                        { label: "two" },
+                        { label: "three", selected: true }
+                    ]} />
                     <h2>Table</h2>
                     <TableComponent data={[ { name: "someone", age: 19 },
                                             { name: "someone else", age: 22 },
@@ -199,7 +214,10 @@ class Components extends React.Component<any, any> {
                     </TableComponent>
                     <h2>Graphs</h2>
                     <h2>Input</h2>
-                    <InputComponent labelText="Something" name="something" model={dogs[0].name} propertyName="givenName" />
+                    <InputComponent labelText="Something"
+                                    name="something"
+                                    model={dogs[0].name}
+                                    propertyName="givenName" />
                     <h2>Date Picker</h2>
                     <h2>Reorder List</h2>
                     <h2>Flex Container</h2>
@@ -250,8 +268,12 @@ class Components extends React.Component<any, any> {
                     <h2>When in viewport</h2>
                     <h2>Form</h2>
                     <FormComponent onSubmit={submitForm}>
-                        <InputComponent labelText="Something" name="something" model={(window as any).model} propertyName="test" />
+                        <InputComponent labelText="Something"
+                                        name="something"
+                                        model={(window as any).model}
+                                        propertyName="test" />
                         <ButtonComponent type="submit">Submit</ButtonComponent>
+                        <div className="response"></div>
                     </FormComponent>
                 </ContentContainerComponent>;
     }
@@ -259,5 +281,8 @@ class Components extends React.Component<any, any> {
 
 function submitForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    isValid((window as any).model) ? console.log("submitted", (window as any).model) : console.log("failed validation");
+    const formResponseField = event.currentTarget.querySelector(".response");
+    isValid((window as any).model)
+            ? formResponseField.innerHTML = `submitted: ${JSON.stringify((window as any).model)}`
+            : formResponseField.innerHTML = "failed validation";
 }

@@ -3,7 +3,7 @@ import * as Express from "express";
 import { startServer } from "./start-server";
 
 // create server
-const app = Express();
+const app: Express.Express = Express();
 
 // setup compression
 app.use(Compression());

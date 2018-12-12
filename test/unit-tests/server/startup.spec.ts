@@ -1,7 +1,7 @@
-import { Expect, AsyncTest, TestFixture } from "alsatian";
-import { server } from "../../../server/startup";
-import * as request from "supertest";
+import { AsyncTest, Expect, TestFixture, Timeout } from "alsatian";
 import { ServerResponse } from "http";
+import * as request from "supertest";
+import { server } from "../../../server/startup";
 
 @TestFixture("server tests")
 export class ServerTest {
@@ -11,12 +11,14 @@ export class ServerTest {
         return new Promise((resolve, reject) => {
             request(server)
                 .get("/")
-                .expect((response: ServerResponse) => {
-                        try {
-                        Expect(response.getHeader("Server")).toBe("something");
+                .set("Accept-Encoding", "identity")
+                .end((error, response) => {
+                    try {
+                        Expect(response.header.server).not.toBeDefined();
+                        Expect(response.header.Server).not.toBeDefined();
                         resolve();
                     }
-                    catch(e) {
+                    catch (e) {
                         reject(e);
                     }
                 });

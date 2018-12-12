@@ -10,9 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const loadingElements = appLoadingNotifcationElement.querySelectorAll(".loading-indicator > div");
 
     // hide them all
-    for (let i = 0; i < loadingElements.length; i++) {
-        (loadingElements[i] as HTMLElement).style.visibility = "hidden";
-    }
+    Array.prototype.forEach((loadingElement: HTMLElement) => {
+        loadingElement.style.visibility = "hidden";
+    }, loadingElements);
 
     let current = 0;
 
