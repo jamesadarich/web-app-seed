@@ -1,5 +1,7 @@
 # web-app-seed
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/jamesadarich/web-app-seed.svg)](https://greenkeeper.io/)
+
 A template to build a web app from
 
 ## Scripts
