@@ -36,12 +36,7 @@ export async function buildWebAppHtml(stats: any) {
 async function updateFileReferences(settings: SettingsMap, sourcePath: string, destinationPath: string) {
     const file = await readFileAsync(sourcePath);
     const template = Handlebars.compile(file);
-    await writeFile(destinationPath, template(settings));
-}
-
-async function copyFile(sourcePath: string, destinationPath: string) {
-    const file = await readFileAsync(sourcePath);
-    await writeFile(destinationPath, file);
+    await writeFileAsync(destinationPath, template(settings));
 }
 
 async function readFileAsync(sourcePath: string) {

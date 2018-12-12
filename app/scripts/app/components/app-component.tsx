@@ -9,20 +9,19 @@ import { MenuItemComponent } from "@justaddjam/strawberry";
 import { ContentContainerComponent } from "@justaddjam/strawberry";
 import { FooterComponent } from "@justaddjam/strawberry";
 import { TabComponent } from "@justaddjam/strawberry";
-import { ButtonComponent }  from "@justaddjam/strawberry";
-import { DropdownComponent }  from "@justaddjam/strawberry";
+import { ButtonComponent } from "@justaddjam/strawberry";
+import { DropdownComponent } from "@justaddjam/strawberry";
 import { TableComponent } from "@justaddjam/strawberry";
 import { TableColumnComponent } from "@justaddjam/strawberry";
 import { CollapsibleSectionComponent } from "@justaddjam/strawberry";
 import { FlexContainer } from "@justaddjam/strawberry";
 import { MultiSelectToggleButtonGroupComponent } from "@justaddjam/strawberry";
-import { RadioButtonComponent } from "@justaddjam/strawberry";
 import { RadioButtonGroupComponent } from "@justaddjam/strawberry";
 import { CheckboxComponent } from "@justaddjam/strawberry";
 import { PopupComponent } from "@justaddjam/strawberry";
 import { DisableOfflineComponent } from "@justaddjam/strawberry";
 import { FormComponent } from "@justaddjam/strawberry";
-import { InputComponent } from "@justaddjam/strawberry";
+import { FormInputComponent } from "@justaddjam/strawberry";
 import { SliderComponent } from "@justaddjam/strawberry";
 import { SwitchComponent } from "@justaddjam/strawberry";
 import { ToggleButtonGroupComponent } from "@justaddjam/strawberry";
@@ -34,7 +33,7 @@ import { ConnectedRouter, routerMiddleware, routerReducer } from "react-router-r
 import { applyMiddleware, combineReducers, createStore } from "redux";
 
 function isValid(model: any) {
-    return !!model.test;
+    return !!model.something;
 }
 
 // Create a history of your choosing (we're using a browser history in this case)
@@ -56,9 +55,9 @@ export class AppComponent extends React.Component<any, {}> {
     public render() {
         return <Provider store={store}>
                     { /* Tell the Router to use our enhanced history */ }
-                    <ConnectedRouter history={history}>
+                    <ConnectedRouter store={store} history={history}>
                         <div className="app">
-                            <MenuComponent title="web app seed">                                
+                            <MenuComponent title="web app seed">
                                 <MenuItemComponent link="/">Home</MenuItemComponent>
                                 <MenuItemComponent link="/components">Components</MenuItemComponent>
                             </MenuComponent>
@@ -133,8 +132,8 @@ class SearchResultComponent extends React.Component<any, any> {
 }
 
 class Components extends React.Component<any, any> {
-    public constructor() {
-        super();
+    public constructor(props: any) {
+        super(props);
 
         this.state = {
             progress: 0
@@ -160,14 +159,14 @@ class Components extends React.Component<any, any> {
 
     public render() {
         return <ContentContainerComponent>
-                    <CheckboxComponent>Split components into npm library</CheckboxComponent>
-                    <CheckboxComponent>Ensure good keyboard support</CheckboxComponent>
-                    <CheckboxComponent>Ensure good screen reader support</CheckboxComponent>
-                    <CheckboxComponent>Add redux form support</CheckboxComponent>
-                    <CheckboxComponent>Remove any in props / state</CheckboxComponent>
-                    <CheckboxComponent>Convert to stateless if possible</CheckboxComponent>
-                    <CheckboxComponent>Review style consistency</CheckboxComponent>
-                    <CheckboxComponent>Add animations</CheckboxComponent>
+                    <CheckboxComponent checked={false}>Split components into npm library</CheckboxComponent>
+                    <CheckboxComponent checked={false}>Ensure good keyboard support</CheckboxComponent>
+                    <CheckboxComponent checked={false}>Ensure good screen reader support</CheckboxComponent>
+                    <CheckboxComponent checked={false}>Add redux form support</CheckboxComponent>
+                    <CheckboxComponent checked={false}>Remove any in props / state</CheckboxComponent>
+                    <CheckboxComponent checked={false}>Convert to stateless if possible</CheckboxComponent>
+                    <CheckboxComponent checked={false}>Review style consistency</CheckboxComponent>
+                    <CheckboxComponent checked={false}>Add animations</CheckboxComponent>
                     <h2>Button</h2>
                     <ButtonComponent>Awesome</ButtonComponent>
                     <ButtonComponent disabled>Disabled</ButtonComponent>
@@ -177,12 +176,12 @@ class Components extends React.Component<any, any> {
                         <div title="two">something else</div>
                     </TabComponent>
                     <h2>Dropdown</h2>
-                    <DropdownComponent>
+                    <DropdownComponent placeholder="Placeholder">
                         <div title="one">something</div>
                         <div title="two">something else</div>
                     </DropdownComponent>
                     <h2>Checkbox</h2>
-                    <CheckboxComponent>
+                    <CheckboxComponent checked={false}>
                         <p>Awesome Checkbox</p>
                     </CheckboxComponent>
                     <h2>Radio</h2>
@@ -201,7 +200,7 @@ class Components extends React.Component<any, any> {
                     <h3>Multi select</h3>
                     <MultiSelectToggleButtonGroupComponent options={[
                         { label: "one", selected: true },
-                        { label: "two" },
+                        { label: "two", selected: false },
                         { label: "three", selected: true }
                     ]} />
                     <h2>Table</h2>
@@ -214,10 +213,11 @@ class Components extends React.Component<any, any> {
                     </TableComponent>
                     <h2>Graphs</h2>
                     <h2>Input</h2>
-                    <InputComponent labelText="Something"
+                    {/* TODO - allow inputs without forms
+                    <FormInputComponent labelText="Something"
                                     name="something"
                                     model={dogs[0].name}
-                                    propertyName="givenName" />
+                    propertyName="givenName" />*/}
                     <h2>Date Picker</h2>
                     <h2>Reorder List</h2>
                     <h2>Flex Container</h2>
@@ -267,11 +267,11 @@ class Components extends React.Component<any, any> {
                     <ProgressBarComponent progress={this.state.progress} max={100} />
                     <h2>When in viewport</h2>
                     <h2>Form</h2>
-                    <FormComponent onSubmit={submitForm}>
-                        <InputComponent labelText="Something"
-                                        name="something"
-                                        model={(window as any).model}
-                                        propertyName="test" />
+                    <FormComponent id="ID" onSubmit={submitForm}>
+                        <FormInputComponent labelText="Something"
+                                            name="something"
+                                            model={(window as any).model}
+                                            propertyName="test" />
                         <ButtonComponent type="submit">Submit</ButtonComponent>
                         <div className="response"></div>
                     </FormComponent>
@@ -279,10 +279,9 @@ class Components extends React.Component<any, any> {
     }
 }
 
-function submitForm(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const formResponseField = event.currentTarget.querySelector(".response");
-    isValid((window as any).model)
-            ? formResponseField.innerHTML = `submitted: ${JSON.stringify((window as any).model)}`
+function submitForm(data: any) {
+    const formResponseField = document.querySelector("form .response");
+    isValid(data)
+            ? formResponseField.innerHTML = `submitted: ${JSON.stringify(data)}`
             : formResponseField.innerHTML = "failed validation";
 }

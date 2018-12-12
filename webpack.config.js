@@ -1,5 +1,4 @@
 const path = require("path");
-const fs = require("fs");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const buildPath = path.resolve(__dirname, "dist");
 const production = process.argv.indexOf("--optimize-minimize") > -1;
