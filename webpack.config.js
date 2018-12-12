@@ -9,8 +9,6 @@ module.exports = {
   entry: {
     "app-startup": "./app/scripts/app/startup.ts",
     "legacy-app-loading": "./app/scripts/app-loading/legacy-app-loading.ts",
-    "service-worker": "./app/scripts/offline/service-worker.ts",
-    "register-service-worker": "./app/scripts/offline/register-service-worker.ts",
     "loading": "./app/styles/stylesheets/loading.scss",
     "no-script": "./app/styles/stylesheets/no-script.scss",
     "unsupported-browser": "./app/styles/stylesheets/unsupported-browser.scss",

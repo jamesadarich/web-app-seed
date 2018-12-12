@@ -1,8 +1,8 @@
 import { wait } from "./wait";
 
 export interface FakeFetchOptions {
-    delay?: number,
-    httpStatus?: number
+    delay?: number;
+    httpStatus?: number;
 }
 
 export async function fakeFetch(responseBody: string, options?: FakeFetchOptions) {
