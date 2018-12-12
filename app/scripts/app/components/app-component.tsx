@@ -9,8 +9,8 @@ import { MenuItemComponent } from "@justaddjam/strawberry";
 import { ContentContainerComponent } from "@justaddjam/strawberry";
 import { FooterComponent } from "@justaddjam/strawberry";
 import { TabComponent } from "@justaddjam/strawberry";
-import { ButtonComponent }  from "@justaddjam/strawberry";
-import { DropdownComponent }  from "@justaddjam/strawberry";
+import { ButtonComponent } from "@justaddjam/strawberry";
+import { DropdownComponent } from "@justaddjam/strawberry";
 import { TableComponent } from "@justaddjam/strawberry";
 import { TableColumnComponent } from "@justaddjam/strawberry";
 import { CollapsibleSectionComponent } from "@justaddjam/strawberry";
@@ -58,7 +58,7 @@ export class AppComponent extends React.Component<any, {}> {
                     { /* Tell the Router to use our enhanced history */ }
                     <ConnectedRouter history={history}>
                         <div className="app">
-                            <MenuComponent title="web app seed">                                
+                            <MenuComponent title="web app seed">
                                 <MenuItemComponent link="/">Home</MenuItemComponent>
                                 <MenuItemComponent link="/components">Components</MenuItemComponent>
                             </MenuComponent>
