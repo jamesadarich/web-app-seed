@@ -1,0 +1,87 @@
+version: 2
+jobs:
+  build_and_push_image:
+    docker:
+      - image: docker:stable-git
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run: docker info
+      - run: docker build . --tag jamesadarich/james.adarich.com:${DOCKER_IMAGE_TAG:-latest} --build-arg SITE_DOMAIN=james.adarich.com --rm=false
+      # - run: docker run -d -p 8080:8080 jamesrichford/jamesadarich.com:${DOCKER_IMAGE_TAG:-latest}
+      - run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - run: docker push jamesadarich/james.adarich.com:${DOCKER_IMAGE_TAG:-latest}
+  browser_tests:
+    docker:
+      - image: node:8
+    steps:
+      # simple check to make sure the server started
+      # could do with some lovely selenium tests at some point
+      # - run: apt-get install curl
+      # - run: curl --retry 10 --retry-delay 5 -v http://localhost:8080
+      - run: echo "run some browser tests"
+  static_analysis:
+    docker:
+      - image: node:8
+    steps:
+      - checkout
+      - run: npm install
+      - run: npm test
+  tidy_up:
+    docker:
+      - image: node:8
+    steps:
+      - run: echo 'export DOCKER_IMAGE_TAG=$(echo "${CI_PULL_REQUEST##*/}")' >> $BASH_ENV
+      - run: echo "DELETE DOCKER TAG ${DOCKER_IMAGE_TAG}"
+  deploy:
+    docker:
+      - image: microsoft/azure-cli:2.0.31
+    steps:
+      - run: az aks install-cli
+      - run: az login -u ${AZURE_SERVICE_PRINCIPAL_USERNAME} -p ${AZURE_SERVICE_PRINCIPAL_PASSWORD}
+      - run: az aks get-credentials --resource-group docker-adarich --name james-adarich-site
+      - run:
+        name: deploy to staging
+        command: |
+          staging-service=kubectl get ingress tls-ingress -o=jsonpath={.spec.rules[?(@.host==\"staging.james.adarich.com\")].http.paths[0].backend.serviceName}
+          staging-deployment=kubectl get service ${staging-service} -o=jsonpath={.spec.selector.app}
+          sed 's/{staging-deployment-name}/${staging-deployment}/g' <infrastructure\kubernetes\staging-deployment-template.yaml >infrastructure\kubernetes\staging-deployment.yaml
+          kubectl delete deployment ${staging-deployment}
+          kubectl create -f infrastructure\kubernetes\staging-deployment.yaml
+      - run: echo "test staging"
+      - run:
+        name: swap slots
+        command: |
+          production-service=kubectl get ingress tls-ingress -o=jsonpath={.spec.rules[?(@.host==\"james.adarich.com\")].http.paths[0].backend.serviceName}
+          staging-service=kubectl get ingress tls-ingress -o=jsonpath={.spec.rules[?(@.host==\"staging.james.adarich.com\")].http.paths[0].backend.serviceName}
+          echo "build ingress yaml"
+          echo "apply new ingress yaml"
+workflows:
+  version: 2
+  continuous_integration:
+    jobs:
+      - static_analysis
+#      - build_and_push_image:
+#          filters:
+#            branches:
+#              only:
+#                - master
+#      - browser_tests:
+#          requires:
+#            - build_and_push_image
+#      - qa_approval:
+#          type: approval
+#          requires:
+#            - browser_tests
+#            - static_analysis
+#          filters:
+#            branches:
+#              ignore:
+#                - master
+#      - tidy_up:
+#          requires:
+#            - qa_approval
+#          filters:
+#            branches:
+#              ignore:
+#                - master
