@@ -268,7 +268,7 @@ class Components extends React.Component<any, any> {
                     <h2>When in viewport</h2>
                     <h2>Form</h2>
                     <FormComponent id="ID" onSubmit={submitForm}>
-                        <FormInputComponent labelText="Something"
+                        <FormInputComponent label="Something"
                                             name="something"
                                             model={(window as any).model}
                                             propertyName="test" />

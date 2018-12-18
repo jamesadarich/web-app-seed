@@ -26,9 +26,7 @@
     "test": "npm run lint && npm run unit-tests",
     "build-unit-tests": "tsc -p ./test/unit-tests",
     "unit-tests": "alsatian \"./test/unit-tests/**/*.spec.js\"",
-    "prestart": "npm run build",
-    "start-web-server": "node server/startup.js",
-    "start": "npm run start-web-server"
+    "start": "node server/startup.js"
   },
   "repository": {
     "type": "git",
@@ -91,5 +89,14 @@
     "redux": "^4.0.1",
     "serve-static": "^1.11.1",
     "watch": "^1.0.1"
-  }
+  },
+  "bundleDependencies": [
+    "@justaddjam/strawberry",
+    "react",
+    "react-dom",
+    "react-redux",
+    "react-router",
+    "react-router-dom",
+    "redux"
+  ]
 }
