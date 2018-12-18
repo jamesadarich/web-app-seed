@@ -49,7 +49,7 @@ export async function startServer(app: Application) {
 
     const httpServer = Http.createServer(app);
 
-    const port = process.env.PORT || 4000;
+    const port = process.env.PORT || 80;
 
     httpServer.listen(port);
     process.stdout.write("serving at port " + port);
