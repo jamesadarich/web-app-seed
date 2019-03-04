@@ -1,3 +1,4 @@
+import "!style-loader!css-loader!sass-loader!./app.scss";
 import { FlexFillRemainderComponent } from "@justaddjam/strawberry";
 import { GalleryComponent } from "@justaddjam/strawberry";
 import { ProgressBarComponent } from "@justaddjam/strawberry";

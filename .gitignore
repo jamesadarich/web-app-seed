@@ -8,9 +8,6 @@ debug.log
 *.js.map
 *.d.ts
 
-#Webpack
-!webpack.config.js
-
 #Sass
 *.css
 

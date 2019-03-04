@@ -8,16 +8,8 @@
         <!-- PAGE METADATA -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-        <!-- PAGE STYLES -->
-        <style type="text/css">
-            {{> loading.css}}
-        </style>
-
         <!-- PAGE SCRIPTS -->
-        <script src="/{{scripts.app-startup}}" async type="text/javascript"></script>
-        <!--[if lte IE 9]>
-            <script async src="/{{scripts.legacy-app-loading}}"></script>
-        <![endif]-->
+        <script src="<%= htmlWebpackPlugin.files.chunks.app.entry %>" async type="text/javascript"></script>
 
         <!-- OFFLINE SUPPORT -->
         <!-- script src="/{{scripts.register-service-worker}}" async type="text/javascript"></script -->
@@ -30,20 +22,9 @@
     <body>
         <!-- App placeholder -->
         <div id="app"></div>
-        <!-- App loading notification -->
-        <div class="app-loading-notification">
-            <div class="loading-message">
-                <h1>loading</h1>
-                <div class="loading-indicator">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-        </div>
         <!-- No JavaScript message -->
         <noscript>
-            <link href="/{{styles.no-script}}" type="text/css" rel="stylesheet" />
+            <link href="<%= htmlWebpackPlugin.files.chunks['no-script'].css %>" type="text/css" rel="stylesheet" />
             <div class="no-script-error">
                 <div class="error-container">
                     <span class="error-icon">

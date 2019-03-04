@@ -25,8 +25,8 @@
       "../../node_modules"
    ],
    "include": [
-      "./scripts/**/*.ts",
-      "./scripts/**/*.tsx"
+      "./**/*.ts",
+      "./**/*.tsx"
    ],
    "atom": {
       "rewriteTsconfig": false

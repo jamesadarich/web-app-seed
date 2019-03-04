@@ -1,20 +1,19 @@
-const path = require("path");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const buildPath = path.resolve(__dirname, "dist");
-const production = process.argv.indexOf("--optimize-minimize") > -1;
-const buildWebAppHtml = require("./scripts/build-html").buildWebAppHtml;
+import { resolve } from "path";
+import * as ExtractTextPlugin from "extract-text-webpack-plugin";
+import * as HtmlTextPlugin from "html-webpack-plugin";
+import { Configuration } from "webpack";
 
-module.exports = {
+const buildPath = resolve(__dirname, "dist");
+
+const WebpackConfig: Configuration = {
   entry: {
-    "app-startup": "./app/scripts/app/startup.ts",
-    "legacy-app-loading": "./app/scripts/app-loading/legacy-app-loading.ts",
-    "loading": "./app/styles/stylesheets/loading.scss",
+    "app": "./app/startup.tsx",
     "no-script": "./app/styles/stylesheets/no-script.scss",
     "unsupported-browser": "./app/styles/stylesheets/unsupported-browser.scss",
   },
   output: {
     path: buildPath,
-    filename: production ? "scripts/[name]-[chunkhash].js" : "scripts/[name]-[hash].js",
+    filename: "scripts/[name]-[chunkhash].js",
     publicPath: "/"
   },
   module: {
@@ -22,8 +21,8 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-            "style-loader",
-            "css-loader"
+          "style-loader",
+          "css-loader"
         ],
         exclude: /node_modules/
       },
@@ -47,17 +46,23 @@ module.exports = {
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: production ? "styles/[name]-[chunkhash].css" : "styles/[name]-[hash].css",
+      filename: "styles/[name]-[chunkhash].css",
     }),
-    function() {
-      this.plugin("done", buildWebAppHtml);
-    }
+    new HtmlTextPlugin({
+      filename: "index.html",
+      inject: false,
+      minify: true as any,
+      template: "app/index.html"
+    })
   ],
   devServer: {
     compress: true,
     contentBase: buildPath,
     historyApiFallback: true,
+    hot: true,
     port: 3000,
     public: "webappseed.localtunnel.me"
   }
 };
+
+export default WebpackConfig;
