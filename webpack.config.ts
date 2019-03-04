@@ -51,7 +51,6 @@ const WebpackConfig: Configuration = {
     new HtmlTextPlugin({
       filename: "index.html",
       inject: false,
-      minify: true as any,
       template: "app/index.html"
     })
   ],
