@@ -65,7 +65,7 @@
     "sass-lint": "^1.10.2",
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
-    "stylelint": "^9.9.0",
+    "stylelint": "^10.1.0",
     "stylelint-webpack-plugin": "^0.10.5",
     "supertest": "^3.0.0",
     "ts-loader": "^5.3.1",
