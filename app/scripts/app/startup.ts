@@ -1,5 +1,9 @@
 // load the stylesheet
 import "!style-loader!css-loader!sass-loader!../../styles/stylesheets/app.scss";
+
+// load polyfills
+import "./polyfills";
+
 import { initializeApp } from "./initialize-react";
 
 // start the app (dummy example)
