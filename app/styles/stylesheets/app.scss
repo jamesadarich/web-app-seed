@@ -3,7 +3,8 @@
 $padding-medium: 12px;
 $desktop-min-width: 1024px;
 
-html, .app, #app {
+// IE Fix
+html, body, .app, #app {
     height: 100%;
 }
 
