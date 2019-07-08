@@ -1,4 +1,4 @@
-import "!style-loader!css-loader!sass-loader!./app.scss";
+import "./app.scss";
 import { FooterComponent, MenuComponent, MenuItemComponent } from "@justaddjam/strawberry";
 import createHistory from "history/createBrowserHistory";
 import * as React from "react";

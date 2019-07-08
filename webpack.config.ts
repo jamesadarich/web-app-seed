@@ -1,5 +1,5 @@
 import { resolve } from "path";
-import * as ExtractTextPlugin from "extract-text-webpack-plugin";
+import * as MiniCssExtractPlugin from "mini-css-extract-plugin";
 import * as HtmlTextPlugin from "html-webpack-plugin";
 import { Configuration } from "webpack";
 
@@ -7,37 +7,32 @@ const buildPath = resolve(__dirname, "dist");
 
 const WebpackConfig: Configuration = {
   entry: {
-    "app": "./app/startup.tsx",
+    "app": "./app/startup.tsx"
+    /*,
     "no-script": "./app/styles/stylesheets/no-script.scss",
     "unsupported-browser": "./app/styles/stylesheets/unsupported-browser.scss",
+    */
   },
   output: {
     path: buildPath,
-    filename: "scripts/[name]-[chunkhash].js",
+    filename: "scripts/[name]-[hash].js",
     publicPath: "/"
   },
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [
-          "style-loader",
-          "css-loader"
-        ],
+        test: /\.tsx?$/,
+        use: "ts-loader",
         exclude: /node_modules/
       },
       {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [ "css-loader", "sass-loader" ]
-        }),
-        exclude: /node_modules/
-      },
-      {
-        test: /\.tsx?$/,
-        use: "ts-loader",
-        exclude: /node_modules/
+        use: [
+          //"style-loader",
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader"
+        ]
       }
     ]
   },
@@ -45,12 +40,13 @@ const WebpackConfig: Configuration = {
     extensions: [".tsx", ".ts", ".js"]
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename: "styles/[name]-[chunkhash].css",
+    new MiniCssExtractPlugin({
+      filename: "styles/[name]-[contenthash].css",
+
     }),
     new HtmlTextPlugin({
       filename: "index.html",
-      inject: false,
+      // inject: false,
       template: "app/index.html"
     })
   ],

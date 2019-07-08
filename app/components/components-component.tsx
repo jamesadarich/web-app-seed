@@ -114,7 +114,7 @@ export class Components extends React.Component<any, any> {
                     <CheckboxComponent checked={false}>Remove any in props / state</CheckboxComponent>
                     <CheckboxComponent checked={false}>Convert to stateless if possible</CheckboxComponent>
                     <CheckboxComponent checked={false}>Review style consistency</CheckboxComponent>
-                    <CheckboxComponent checked={false}>Add animations</CheckboxComponent>
+                    <CheckboxComponent checked={false}>Add 2 animations</CheckboxComponent>
                     <h2>Button</h2>
                     <ButtonComponent>Awesome</ButtonComponent>
                     <ButtonComponent disabled>Disabled</ButtonComponent>
