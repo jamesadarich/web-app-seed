@@ -1,12 +1,9 @@
 @import "../variables/global";
+@import "../fixes/_index";
 
 $padding-medium: 12px;
 $desktop-min-width: 1024px;
 
-// IE Fix
-html, body, .app, #app {
-    height: 100%;
-}
 
 body {
     font-family: sans-serif;
