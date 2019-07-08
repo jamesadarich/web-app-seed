@@ -1,3 +1,4 @@
+import "promise-polyfill/src/polyfill";
 import * as Compression from "compression";
 import * as Express from "express";
 import { startServer } from "./start-server";
