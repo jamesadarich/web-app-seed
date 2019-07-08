@@ -1,3 +1,4 @@
+import "promise-polyfill/src/polyfill";
 // load the stylesheet
 import "!style-loader!css-loader!sass-loader!../../styles/stylesheets/app.scss";
 import { initializeApp } from "./initialize-react";
