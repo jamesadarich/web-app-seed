@@ -3,7 +3,7 @@ import "./polyfills";
 
 import * as React from "react";
 import { render } from "react-dom";
-import { AppComponent } from "./components/app-component";
+import { AppComponent } from "./core/app";
 
 // start the app
 render(<AppComponent />, document.getElementById("app"));

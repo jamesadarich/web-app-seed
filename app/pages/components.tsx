@@ -79,7 +79,7 @@ class SearchResultComponent extends React.Component<any, any> {
     }
 }
 
-export class Components extends React.Component<any, any> {
+export default class Components extends React.Component<any, any> {
     public constructor(props: any) {
         super(props);
 

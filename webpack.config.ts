@@ -38,6 +38,7 @@ const WEBPACK_CONFIG: Configuration = {
   },
   output: {
     filename: "scripts/[name]-[hash].js",
+    chunkFilename: "scripts/[name]-[hash].js",
     path: buildPath,
     publicPath: "/"
   },
