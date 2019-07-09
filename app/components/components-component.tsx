@@ -1,19 +1,16 @@
-import { FlexFillRemainderComponent } from "@justaddjam/strawberry";
+import { CollapsibleSectionComponent } from "@justaddjam/strawberry";
+import { ContentContainerComponent } from "@justaddjam/strawberry";
 import { GalleryComponent } from "@justaddjam/strawberry";
 import { ProgressBarComponent } from "@justaddjam/strawberry";
 import { SearchComponent } from "@justaddjam/strawberry";
 import { RangeComponent } from "@justaddjam/strawberry";
 import { notify } from "@justaddjam/strawberry";
-import { MenuComponent } from "@justaddjam/strawberry";
-import { MenuItemComponent } from "@justaddjam/strawberry";
-import { ContentContainerComponent } from "@justaddjam/strawberry";
-import { FooterComponent } from "@justaddjam/strawberry";
 import { TabComponent } from "@justaddjam/strawberry";
 import { ButtonComponent } from "@justaddjam/strawberry";
 import { DropdownComponent } from "@justaddjam/strawberry";
 import { TableComponent } from "@justaddjam/strawberry";
 import { TableColumnComponent } from "@justaddjam/strawberry";
-import { CollapsibleSectionComponent } from "@justaddjam/strawberry";
+import { FlexFillRemainderComponent } from "@justaddjam/strawberry";
 import { FlexContainer } from "@justaddjam/strawberry";
 import { MultiSelectToggleButtonGroupComponent } from "@justaddjam/strawberry";
 import { RadioButtonGroupComponent } from "@justaddjam/strawberry";
@@ -25,59 +22,10 @@ import { FormInputComponent } from "@justaddjam/strawberry";
 import { SliderComponent } from "@justaddjam/strawberry";
 import { SwitchComponent } from "@justaddjam/strawberry";
 import { ToggleButtonGroupComponent } from "@justaddjam/strawberry";
-import createHistory from "history/createBrowserHistory";
 import * as React from "react";
-import { Provider } from "react-redux";
-import { Route } from "react-router";
-import { ConnectedRouter, routerMiddleware, routerReducer } from "react-router-redux";
-import { applyMiddleware, combineReducers, createStore } from "redux";
 
 function isValid(model: any) {
     return !!model.something;
-}
-
-// Create a history of your choosing (we're using a browser history in this case)
-const history = createHistory();
-
-// Build the middleware for intercepting and dispatching navigation actions
-const middleware = routerMiddleware(history);
-
-// Add the reducer to your store on the `router` key
-// Also apply our middleware for navigating
-const store = createStore(
-  combineReducers({
-    router: routerReducer
-  }),
-  applyMiddleware(middleware)
-);
-
-export class AppComponent extends React.Component<any, {}> {
-    public render() {
-        return <Provider store={store}>
-                    { /* Tell the Router to use our enhanced history */ }
-                    <ConnectedRouter store={store} history={history}>
-                        <div className="app">
-                            <MenuComponent title="web app seed">
-                                <MenuItemComponent link="/">Home</MenuItemComponent>
-                                <MenuItemComponent link="/components">Components</MenuItemComponent>
-                            </MenuComponent>
-                            <div className="app-contents">
-                                <Route path="/" exact component={Home}/>
-                                <Route path="/components" component={Components}/>
-                            </div>
-                            <FooterComponent>Some copyright</FooterComponent>
-                        </div>
-                    </ConnectedRouter>
-                </Provider>;
-    }
-}
-
-class Home extends React.Component {
-    public render() {
-        return <ContentContainerComponent>
-                    <h2>Home</h2>
-                </ContentContainerComponent>;
-    }
 }
 
 (window as any).model = {};
@@ -131,7 +79,7 @@ class SearchResultComponent extends React.Component<any, any> {
     }
 }
 
-class Components extends React.Component<any, any> {
+export class Components extends React.Component<any, any> {
     public constructor(props: any) {
         super(props);
 
@@ -166,7 +114,7 @@ class Components extends React.Component<any, any> {
                     <CheckboxComponent checked={false}>Remove any in props / state</CheckboxComponent>
                     <CheckboxComponent checked={false}>Convert to stateless if possible</CheckboxComponent>
                     <CheckboxComponent checked={false}>Review style consistency</CheckboxComponent>
-                    <CheckboxComponent checked={false}>Add animations</CheckboxComponent>
+                    <CheckboxComponent checked={false}>Add 2 animations</CheckboxComponent>
                     <h2>Button</h2>
                     <ButtonComponent>Awesome</ButtonComponent>
                     <ButtonComponent disabled>Disabled</ButtonComponent>

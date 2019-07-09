@@ -1,7 +1,7 @@
 {
    "compilerOptions": {
       "target": "es5",
-      "module": "commonjs",
+      "module": "es6",
       "moduleResolution": "node",
       "noImplicitAny": true,
       "declaration": false,
@@ -18,17 +18,12 @@
           "webworker"
       ]
    },
-   "buildOnSave": false,
-   "compileOnSave": true,
    "exclude": [
       "./**/*.d.ts",
       "../../node_modules"
    ],
    "include": [
-      "./scripts/**/*.ts",
-      "./scripts/**/*.tsx"
-   ],
-   "atom": {
-      "rewriteTsconfig": false
-   }
+      "./**/*.ts",
+      "./**/*.tsx"
+   ]
 }
