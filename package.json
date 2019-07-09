@@ -16,7 +16,7 @@
     "dev:app": "npm-run-all --parallel build:app:images dev:app:assets",
     "prototype": "npm-run-all build:scripts prototype:app",
     "prototype:app": "npm-run-all --parallel build:app:images dev:app:assets expose-to-networked-devices",
-    "dev:app:assets": "npm run build:webpack && webpack-dev-server --mode development",
+    "dev:app:assets": "npm run build:webpack && webpack-dev-server --mode development --devtool source-map",
     "expose-to-networked-devices": "lt --port 3000 --subdomain webappseed",
     "init-solution": "npm run build:scripts && node ./scripts/initialize-solution.js",
     "lint": "npm run lint:typescript && npm run lint:sass",

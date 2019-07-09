@@ -1,4 +1,3 @@
-import "./app.scss";
 import { FooterComponent, MenuComponent, MenuItemComponent } from "@justaddjam/strawberry";
 import createHistory from "history/createBrowserHistory";
 import * as React from "react";
@@ -6,8 +5,9 @@ import { Provider } from "react-redux";
 import { Route } from "react-router";
 import { ConnectedRouter, routerMiddleware, routerReducer } from "react-router-redux";
 import { applyMiddleware, combineReducers, createStore } from "redux";
-import { Home } from "./home-component";
+import "./app.scss";
 import { Components } from "./components-component";
+import { Home } from "./home-component";
 
 // Create a history of your choosing (we're using a browser history in this case)
 const history = createHistory();

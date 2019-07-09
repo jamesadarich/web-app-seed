@@ -1,5 +1,5 @@
-import * as React from "react";
-import { FlexFillRemainderComponent } from "@justaddjam/strawberry";
+import { CollapsibleSectionComponent } from "@justaddjam/strawberry";
+import { ContentContainerComponent } from "@justaddjam/strawberry";
 import { GalleryComponent } from "@justaddjam/strawberry";
 import { ProgressBarComponent } from "@justaddjam/strawberry";
 import { SearchComponent } from "@justaddjam/strawberry";
@@ -10,7 +10,7 @@ import { ButtonComponent } from "@justaddjam/strawberry";
 import { DropdownComponent } from "@justaddjam/strawberry";
 import { TableComponent } from "@justaddjam/strawberry";
 import { TableColumnComponent } from "@justaddjam/strawberry";
-import { CollapsibleSectionComponent } from "@justaddjam/strawberry";
+import { FlexFillRemainderComponent } from "@justaddjam/strawberry";
 import { FlexContainer } from "@justaddjam/strawberry";
 import { MultiSelectToggleButtonGroupComponent } from "@justaddjam/strawberry";
 import { RadioButtonGroupComponent } from "@justaddjam/strawberry";
@@ -22,7 +22,7 @@ import { FormInputComponent } from "@justaddjam/strawberry";
 import { SliderComponent } from "@justaddjam/strawberry";
 import { SwitchComponent } from "@justaddjam/strawberry";
 import { ToggleButtonGroupComponent } from "@justaddjam/strawberry";
-import { ContentContainerComponent } from "@justaddjam/strawberry";
+import * as React from "react";
 
 function isValid(model: any) {
     return !!model.something;
