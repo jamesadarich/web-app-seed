@@ -15,11 +15,9 @@ const WEBPACK_CONFIG: Configuration = {
     public: "webappseed.localtunnel.me"
   },
   entry: {
-    app: "./app/startup.tsx"
-    /*,
+    app: "./app/startup.tsx",
     "no-script": "./app/styles/stylesheets/no-script.scss",
-    "unsupported-browser": "./app/styles/stylesheets/unsupported-browser.scss",
-    */
+    "unsupported-browser": "./app/styles/stylesheets/unsupported-browser.scss"
   },
   module: {
     rules: [
@@ -31,7 +29,6 @@ const WEBPACK_CONFIG: Configuration = {
       {
         test: /\.scss$/,
         use: [
-          // "style-loader",
           MiniCssExtractPlugin.loader,
           "css-loader",
           "sass-loader"
@@ -50,7 +47,6 @@ const WEBPACK_CONFIG: Configuration = {
     }),
     new HtmlTextPlugin({
       filename: "index.html",
-      // inject: false,
       template: "app/index.html"
     })
   ],

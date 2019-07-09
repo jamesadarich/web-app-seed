@@ -1,7 +1,9 @@
 @import "../styles/variables/global";
+@import "../styles/fixes/_index";
 
 $padding-medium: 12px;
 $desktop-min-width: 1024px;
+
 
 body {
     font-family: sans-serif;
