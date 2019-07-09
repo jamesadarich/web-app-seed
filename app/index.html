@@ -8,13 +8,14 @@
         <!-- PAGE METADATA -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-        <!-- PAGE SCRIPTS -->
+        <!-- PAGE SCRIPTS -->        
         <script src="<%= htmlWebpackPlugin.files.chunks.app.entry %>" async type="text/javascript"></script>
+        <link href="<%= htmlWebpackPlugin.files.chunks.app.css %>" type="text/css" rel="stylesheet" />
 
         <!-- OFFLINE SUPPORT -->
         <!-- script src="/{{scripts.register-service-worker}}" async type="text/javascript"></script -->
         <!-- INSTALLABLE ON MOBILE -->
-        <link rel="manifest" href="/manifest.json">
+        <!--link rel="manifest" href="/manifest.json"-->
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="theme-color" content="{{colors.theme}}">
