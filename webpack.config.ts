@@ -17,7 +17,7 @@ const WEBPACK_CONFIG: Configuration = {
   entry: {
     app: "./app/startup.tsx",
     "no-script": "./app/styles/stylesheets/no-script.scss",
-    "unsupported-browser": "./app/styles/stylesheets/unsupported-browser.scss"
+    "unsupported-browser": "./app/styles/stylesheets/unsupported-browser.scss",
   },
   module: {
     rules: [
@@ -47,6 +47,7 @@ const WEBPACK_CONFIG: Configuration = {
     }),
     new HtmlTextPlugin({
       filename: "index.html",
+      inject: false,
       template: "app/index.html"
     })
   ],
