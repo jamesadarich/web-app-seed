@@ -42,6 +42,11 @@ const WEBPACK_CONFIG: Configuration = {
     path: buildPath,
     publicPath: "/"
   },
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: "styles/[name]-[contenthash].css",
