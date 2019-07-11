@@ -8,9 +8,9 @@
         <!-- PAGE METADATA -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-        <!-- PAGE SCRIPTS -->        
-        <script src="<%= htmlWebpackPlugin.files.chunks.app.entry %>" async type="text/javascript"></script>
+        <!-- PAGE SCRIPTS -->
         <link href="<%= htmlWebpackPlugin.files.chunks.app.css %>" type="text/css" rel="stylesheet" />
+        <div><%= JSON.stringify(htmlWebpackPlugin) %></div>     
 
         <!-- OFFLINE SUPPORT -->
         <!-- script src="/{{scripts.register-service-worker}}" async type="text/javascript"></script -->
@@ -51,5 +51,8 @@
                 </div>
             </div>
         <![endif]-->
+        <script src="<%= htmlWebpackPlugin.files.chunks['vendors~app~no-script~unsupported-browser'].entry %>" type="text/javascript"></script>
+        <script src="<%= htmlWebpackPlugin.files.chunks['vendors~app'].entry %>" type="text/javascript"></script>
+        <script src="<%= htmlWebpackPlugin.files.chunks.app.entry %>" type="text/javascript"></script>
     </body>
 </html>
