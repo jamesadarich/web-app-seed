@@ -10,7 +10,6 @@
 
         <!-- PAGE SCRIPTS -->
         <link href="<%= htmlWebpackPlugin.files.chunks.app.css %>" type="text/css" rel="stylesheet" />
-        <script src="<%= htmlWebpackPlugin.files.chunks['vendors~app~no-script~unsupported-browser'].entry %>" defer type="text/javascript"></script>
         <script src="<%= htmlWebpackPlugin.files.chunks['vendors~app'].entry %>" defer type="text/javascript"></script>
         <script src="<%= htmlWebpackPlugin.files.chunks.app.entry %>" defer type="text/javascript"></script>
         <div><%= JSON.stringify(htmlWebpackPlugin) %></div>     
