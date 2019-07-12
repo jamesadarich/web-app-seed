@@ -36,12 +36,12 @@ export function AppComponent() {
                             <MenuItemComponent link="/">Home</MenuItemComponent>
                             <MenuItemComponent link="/components">Components</MenuItemComponent>
                         </MenuComponent>
-                        <Suspense fallback={<Loading />}>
-                            <div className="app-contents">
+                        <div className="app-contents">
+                            <Suspense fallback={<Loading />}>
                                 <Route exact path="/" component={Home} />
                                 <Route exact path="/components" component={Components} />
-                            </div>
-                        </Suspense>
+                            </Suspense>
+                        </div>
                         <FooterComponent>Some copyright</FooterComponent>
                     </div>
                 </ConnectedRouter>
