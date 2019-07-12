@@ -10,7 +10,6 @@ const WEBPACK_CONFIG: Configuration = {
     compress: true,
     contentBase: buildPath,
     historyApiFallback: true,
-    hot: true,
     port: 3000,
     public: "webappseed.localtunnel.me"
   },
@@ -35,8 +34,8 @@ const WEBPACK_CONFIG: Configuration = {
     ]
   },
   output: {
-    filename: "scripts/[name]-[hash].js",
-    chunkFilename: "scripts/[name]-[hash].js",
+    filename: "scripts/[name]-[contenthash].js",
+    chunkFilename: "scripts/[name]-[contenthash].js",
     path: buildPath,
     publicPath: "/"
   },
@@ -49,13 +48,13 @@ const WEBPACK_CONFIG: Configuration = {
       cacheGroups: {
         vendor: {
           test: /[\\/]node_modules[\\/]/,
-          name(module) {
+          name: module => {
             // get the name. E.g. node_modules/packageName/not/this/part.js
             // or node_modules/packageName
-            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+            const packageName = module.context.match(/[\\/]node_modules[\\/]((@.+[\\/])?.*?)([\\/]|$)/)[1];
 
             // npm package names are URL-safe, but some servers don't like @ symbols
-            return `npm.${packageName.replace('@', '')}`;
+            return packageName.replace(/@/g, "").replace(/[\\/]/g, "-");
           }
         }
       }

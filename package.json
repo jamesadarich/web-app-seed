@@ -59,6 +59,7 @@
     "@types/watch": "1.0.0",
     "@types/webpack": "^4.4.25",
     "@types/webpack-dev-server": "^3.1.2",
+    "@types/whatwg-fetch": "0.0.33",
     "alsatian": "^2.3.0",
     "awesome-typescript-loader": "^5.2.1",
     "css-loader": "^2.0.0",
@@ -81,7 +82,8 @@
     "typescript": "^3.2.2",
     "webpack": "^4.35.3",
     "webpack-cli": "^3.3.5",
-    "webpack-dev-server": "^3.7.2"
+    "webpack-dev-server": "^3.7.2",
+    "whatwg-fetch": "^3.0.0"
   },
   "dependencies": {
     "@justaddjam/strawberry": "^0.10.0",
