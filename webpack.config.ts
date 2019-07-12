@@ -15,9 +15,7 @@ const WEBPACK_CONFIG: Configuration = {
     public: "webappseed.localtunnel.me"
   },
   entry: {
-    "app": "./app/startup.tsx",
-    "no-script": "./app/styles/stylesheets/no-script.scss",
-    "unsupported-browser": "./app/styles/stylesheets/unsupported-browser.scss",
+    "app": "./app/startup.tsx"
   },
   module: {
     rules: [
@@ -45,7 +43,7 @@ const WEBPACK_CONFIG: Configuration = {
   optimization: {
     runtimeChunk: "single",
     splitChunks: {
-      chunks: "all",/*
+      chunks: "all",
       maxInitialRequests: Infinity,
       minSize: 0,
       cacheGroups: {
@@ -60,7 +58,7 @@ const WEBPACK_CONFIG: Configuration = {
             return `npm.${packageName.replace('@', '')}`;
           }
         }
-      }*/
+      }
     }
   },
   plugins: [
@@ -69,7 +67,6 @@ const WEBPACK_CONFIG: Configuration = {
     }),
     new HtmlTextPlugin({
       filename: "index.html",
-      inject: false,
       template: "app/index.html"
     })
   ],

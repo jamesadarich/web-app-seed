@@ -8,13 +8,7 @@
         <!-- PAGE METADATA -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-        <!-- PAGE SCRIPTS -->
-        <link href="<%= htmlWebpackPlugin.files.chunks.app.css %>" type="text/css" rel="stylesheet" />
-        <script src="<%= htmlWebpackPlugin.files.chunks['vendors~app~no-script~unsupported-browser'].entry %>" async type="text/javascript"></script>
-        <script src="<%= htmlWebpackPlugin.files.chunks.runtime.entry %>" async type="text/javascript"></script>
-        <script src="<%= htmlWebpackPlugin.files.chunks['vendors~app'].entry %>" async type="text/javascript"></script>
-        <script src="<%= htmlWebpackPlugin.files.chunks.app.entry %>" async type="text/javascript"></script>
-        <div><%= JSON.stringify(htmlWebpackPlugin) %></div>     
+        <!-- PAGE SCRIPTS -->  
 
         <!-- OFFLINE SUPPORT -->
         <!-- script src="/{{scripts.register-service-worker}}" async type="text/javascript"></script -->
@@ -29,7 +23,6 @@
         <div id="app"></div>
         <!-- No JavaScript message -->
         <noscript>
-            <link href="<%= htmlWebpackPlugin.files.chunks['no-script'].css %>" type="text/css" rel="stylesheet" />
             <div class="no-script-error">
                 <div class="error-container">
                     <span class="error-icon">
@@ -43,7 +36,6 @@
         </noscript>
         <!-- Unsupported browser message -->
         <!--[if lte IE 8]>
-            <link href="<%= htmlWebpackPlugin.files.chunks['unsupported-browser'].css %>" type="text/css" rel="stylesheet" />
             <div class="unsupported-browser-error">
                 <div class="error-container">
                     <span class="error-icon">
