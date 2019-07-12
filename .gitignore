@@ -7,6 +7,7 @@ debug.log
 *.js
 *.js.map
 *.d.ts
+!declarations.d.ts
 
 #Sass
 *.css
