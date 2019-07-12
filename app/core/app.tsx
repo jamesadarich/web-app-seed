@@ -1,5 +1,5 @@
 import { FooterComponent, MenuComponent, MenuItemComponent } from "@justaddjam/strawberry";
-import createHistory from "history/createBrowserHistory";
+import { createBrowserHistory } from "history";
 import * as React from "react";
 import { Provider } from "react-redux";
 import { ConnectedRouter, routerMiddleware, routerReducer } from "react-router-redux";
@@ -10,7 +10,7 @@ import { Route } from "react-router";
 import { Loading } from "./loading";
 
 // Create a history of your choosing (we're using a browser history in this case)
-const history = createHistory();
+const history = createBrowserHistory();
 
 // Build the middleware for intercepting and dispatching navigation actions
 const middleware = routerMiddleware(history);

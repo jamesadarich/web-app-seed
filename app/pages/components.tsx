@@ -23,6 +23,8 @@ import { SliderComponent } from "@justaddjam/strawberry";
 import { SwitchComponent } from "@justaddjam/strawberry";
 import { ToggleButtonGroupComponent } from "@justaddjam/strawberry";
 import * as React from "react";
+const Webpack = require("jquery");
+console.log(Webpack);
 
 function isValid(model: any) {
     return !!model.something;
