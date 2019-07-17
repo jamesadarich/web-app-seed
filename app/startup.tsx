@@ -2,7 +2,7 @@
 import * as React from "react";
 import { render } from "react-dom";
 import { AppComponent } from "./core/app";
-import { loadPolyfills } from "./polyfills";
+import { loadPolyfills } from "load-polyfills";
 
 // load polyfills
 loadPolyfills().then(() => {
