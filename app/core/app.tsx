@@ -1,12 +1,12 @@
 import { FooterComponent, MenuComponent, MenuItemComponent } from "@justaddjam/strawberry";
 import { createBrowserHistory } from "history";
 import * as React from "react";
+import { Suspense } from "react";
 import { Provider } from "react-redux";
+import { Route } from "react-router";
 import { ConnectedRouter, routerMiddleware, routerReducer } from "react-router-redux";
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import "./app.scss";
-import { Suspense } from "react";
-import { Route } from "react-router";
 import { Loading } from "./loading";
 
 // Create a history of your choosing (we're using a browser history in this case)
@@ -24,8 +24,8 @@ const store = createStore(
     applyMiddleware(middleware)
 );
 
-const Home = React.lazy(() => import("../pages/home"));
-const Components =  React.lazy(() => import("../pages/components"));
+const HOME = React.lazy(() => import("../pages/home"));
+const COMPONENTS =  React.lazy(() => import("../pages/components"));
 
 export function AppComponent() {
     return <Provider store={store}>
@@ -38,8 +38,8 @@ export function AppComponent() {
                         </MenuComponent>
                         <div className="app-contents">
                             <Suspense fallback={<Loading />}>
-                                <Route exact path="/" component={Home} />
-                                <Route exact path="/components" component={Components} />
+                                <Route exact path="/" component={HOME} />
+                                <Route exact path="/components" component={COMPONENTS} />
                             </Suspense>
                         </div>
                         <FooterComponent>Some copyright</FooterComponent>

@@ -14,7 +14,7 @@ const WEBPACK_CONFIG: Configuration = {
     public: "webappseed.localtunnel.me"
   },
   entry: {
-    "app": "./app/startup.tsx"
+    app: "./app/startup.tsx"
   },
   module: {
     rules: [
@@ -33,21 +33,11 @@ const WEBPACK_CONFIG: Configuration = {
       }
     ]
   },
-  output: {
-    filename: "scripts/[name]-[contenthash].js",
-    chunkFilename: "scripts/[name]-[contenthash].js",
-    path: buildPath,
-    publicPath: "/"
-  },
   optimization: {
     runtimeChunk: "single",
     splitChunks: {
-      chunks: "all",
-      maxInitialRequests: Infinity,
-      minSize: 0,
       cacheGroups: {
         vendor: {
-          test: /[\\/]node_modules[\\/]/,
           name: module => {
             // get the name. E.g. node_modules/packageName/not/this/part.js
             // or node_modules/packageName
@@ -55,10 +45,20 @@ const WEBPACK_CONFIG: Configuration = {
 
             // npm package names are URL-safe, but some servers don't like @ symbols
             return packageName.replace(/@/g, "").replace(/[\\/]/g, "-");
-          }
+          },
+          test: /[\\/]node_modules[\\/]/
         }
-      }
+      },
+      chunks: "all",
+      maxInitialRequests: Infinity,
+      minSize: 0
     }
+  },
+  output: {
+    chunkFilename: "scripts/[name]-[contenthash].js",
+    filename: "scripts/[name]-[contenthash].js",
+    path: buildPath,
+    publicPath: "/"
   },
   plugins: [
     new MiniCssExtractPlugin({
