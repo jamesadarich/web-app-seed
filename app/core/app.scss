@@ -1,8 +1,6 @@
-@import "../styles/variables/global";
-@import "../styles/fixes/_index";
-
-$padding-medium: 12px;
-$desktop-min-width: 1024px;
+@import "../variables";
+@import "../fixes/_index";
+@import "./feel-ui";
 
 
 body {
@@ -49,396 +47,42 @@ footer {
     }
 }
 
-// feel-ui
-.content-container {
-    max-width: $desktop-min-width;
-    margin: 0 auto;
+.app-loading-notification {
+    display: none;
 }
 
-.menu-item-list {
-    display: inline-flex;
-    justify-content: flex-end;
-    right: 0;
-}
-
-.menu-item {
-    display: inline-block;
-    padding: $padding-medium;
-    color: white;
-    font-weight: 700;
-
-    &:hover {
-        background: darken($primary-color, 10%);
-    }
-}
-
-.tab-list {
-    display: flex;
-    .tab-list-item {
-        
-        background: $primary-color;
-        padding: $padding-medium;
-        color: white;
-        font-weight: 700;
-        flex: 1;
-        text-align: center;
-        cursor: pointer;
-
-        &.selected {
-            background: darken($primary-color, 20%);
-        }
-        
-        &:hover {
-            background: darken($primary-color, 10%);
-        }
-    }
-}
-
-button {
-    background: $primary-color;
-    padding: $padding-medium;
-    color: white;
-    border: none;
-    font-weight: 700;
-    border-radius: 0.25rem;
-    cursor: pointer;
-
-    &[disabled] {
-        background: #ccc;
-        color: #666;
-        cursor: not-allowed;
-    }
-}
-
-table {
-    border-collapse: collapse;
-
-    td, th {
-        padding: $padding-medium;
-    }
-
-    th {
-        background: $primary-color;
-        color: white;
-        cursor: pointer;
-    }
-
-    tbody {
-        tr:nth-child(even) {
-            background: #eee;
-        }
-    }
-}
-
-.dropdown {
-    position: relative;
-    cursor: pointer;
-
-    .selected-item {
-        border: 2px solid #ccc;
-        border-radius: 2px;
-        min-height: 1rem;
-        position: relative;
-        padding: $padding-medium;
-
-        &:after {            
-            border-top: #666 solid 0.5rem;
-            border-left: transparent solid 0.5rem;
-            border-right: transparent solid 0.5rem;
-            position: absolute;
-            top: 1rem;
-            right: $padding-medium;
-            content: "";
-        }
-    }
-
-    .dropdown-list {
-        width: 100%;
-        position: absolute;
-        background: white;
-
-        .dropdown-list-item {            
-            padding: $padding-medium;
-            &:hover {
-                background: #eee;
-            }
-        }        
-    }
-}
-
-.collapsible-section-container {
-    border: #ccc solid 1px;
-
-    .collapsible-section-header {
-        background: #eee;
-        cursor: pointer;
-    }
-
-    .collapsible-section-header, .collapsible-section-body {
-        overflow: auto;
-    }
-}
-
-.flex-container {
-    display: flex;
-    align-items: center;
-
-    .flex-fill-remainder {
-        flex: 1;
-    }
-}
-
-.checkbox {
-    cursor: pointer;
-
-    input {
-        display: none;
-    }
-
-    svg {
-        width: 20px;
-        height: 20px;
-        overflow: visible;
-        padding: 2px;
-
-        &.checked {
-            path {
-                stroke-dashoffset: 0;
-            }
-        }
-    }
-
-    path, rect {
-        fill: none;
-    }
-
-    path {
-        stroke-width: 4px;
-        stroke: $primary-color;
-        stroke-dashoffset: 26px;
-        stroke-dasharray: 26px;
-        transition: stroke-dashoffset 0.4s ease;
-    }
-
-    rect {
-        stroke-width: 2px;
-        stroke: #666;
-    }
-
-    &:focus {
-        rect {
-            stroke: $primary-color;
-        }
-
-        outline: none;
-    }
-
-    &[disabled] {
-        rect, path {
-            stroke: #ccc;
-        }
-    }
-}
-
-.radio-button {
-    cursor: pointer;
-    margin: 0.5rem 0;
-
-    input {
-        display: none;
-    }
-
-    .radio-button-outer {
-        border: 0.1rem solid #ccc;
-        border-radius: 50%;
-        width: 1rem;
-        height: 1rem;
-        position: relative;
-        margin-right: 0.5rem;
-    }
-
-    .radio-button-inner {
-        background: $primary-color;
-        position: absolute;
-        left: 0.15rem;
-        top: 0.15rem;
-        border-radius: 50%;
-        width: 0.7rem;
-        height: 0.7rem;
-        transform: scale(0);
-        transition: transform 0.2s ease;
-    }
-
-    .checked .radio-button-inner {
-        transform: scale(1);
-    }
-}
-
-.popup-container {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-
-    .popup {
-        position: absolute;
-        padding: 1rem;
-        background: lighten($primary-color, 50%);
-        margin: 0.5rem 0;
-        z-index: 100;
-    
-        &::before {
-            border-bottom: lighten($primary-color, 50%) solid 0.5rem;
-            border-left: transparent solid 0.5rem;
-            border-right: transparent solid 0.5rem;
-            position: absolute;
-            top: -0.5rem;
-            content: "";
-        }
-    }
-}
-
-input {
-    border-radius: 2px;
-    border: #ccc solid 1px;
-    padding: 0.25rem;
-    display: block;
-    width: 100%;
-    font-size: 1rem;
-    box-sizing: border-box;
-}
-
-.form-field {
-    overflow: auto;
-
-    label {
-        display: block;
-        margin: 0.5rem 0;
-        overflow: auto;
-    }
-
-    .errors-list {
-        margin: 0.5rem 0;
-        overflow: auto;
-        list-style-type: none;
-        padding: 0;
-        color: red;
-    }
-}
-
-.slider {
-    position: relative;
-    padding: 0.5rem 1rem;
-
-    .slider-scale {
-        height: 0.25rem;
-        border-radius: 0.125rem;
-        background: #666;
-    }
-
-    .slider-indicator {
-        height: 0.25rem;
-        border-radius: 0.125rem;
-        background: $primary-color;
-        position: absolute;
-        top: 0.5rem;
-    }
-
-    .slider-knob {
-        width: 1rem;
-        height: 1rem;
-        border-radius: 50%;
-        border: solid #ccc 0.125rem;
-        position: absolute;
-        top: 0;
-        background: white;
-    }
-}
-
-.switch-container {
-    background: #666;
-    border: #ccc solid 2px;
-    border-radius: 0.25rem;
-    height: 2rem;
-    position: relative;
-    cursor: pointer;
-    
-    .switch {
-        height: 2rem;
-        width: 2rem;
-        position: absolute;
-        background: white;
-    }
-
-    &.on {
-        background: $primary-color;
-
-        .switch {
-            right: 0;
-        }
-    }
-}
-
-.toggle-button {
-    border-radius: 0;
-    border: darken($primary-color, 20%) solid 1px;
-
-    &.on {
-        background: darken($primary-color, 20%);
-    }
-}
-
-.notification-container {
+.app-error {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
-    
-    .notification {
-        background: black;
+    height: 100%;
+    background: $dark-gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .error-container {
+        background: $error-dark;
         color: white;
-        margin: 1rem;
-        padding: 1rem;
-    }
-}
-
-
-.progress-bar-container {
-    height: 0.25rem;
-    border-radius: 0.125rem;
-    background: #666;
-
-    .progress-bar {
-        background: $primary-color;
-        height: 100%;
-        transition: width 0.4s ease;
-    }
-}
-
-.gallery {
-    .focussed-image {
-        height: 18em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        img {
-            max-height: 100%;
-            max-width: 100%;
-        }
+        display: block;
+        margin: 10em auto;
+        max-width: 32em;
+        box-shadow: 0 8px 17px 2px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.2);
     }
 
-    .thumbnail-list {
-        padding: 1em;
-        overflow: auto;
-        display: flex;
+    .error-footer {
+        padding: 1em 2em;
+        background: white;
+    }
 
-        .thumbnail {
-            margin: 1em;
-            display: inline-block;
-            
-            img {
-                height: 6em;
-                cursor: pointer;
-            }
-        }
+    .error-body {
+        padding: 1em 1.5em;
+    }
+
+    .error-header, {
+        padding: 0.5em 0.75em;
+        border-bottom: $error-light solid 0.05em;
+        margin: 0;
     }
 }
