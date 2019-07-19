@@ -10,14 +10,11 @@ const WEBPACK_CONFIG: Configuration = {
     compress: true,
     contentBase: buildPath,
     historyApiFallback: true,
-    hot: true,
     port: 3000,
     public: "webappseed.localtunnel.me"
   },
   entry: {
-    "app": "./app/startup.tsx",
-    "no-script": "./app/styles/stylesheets/no-script.scss",
-    "unsupported-browser": "./app/styles/stylesheets/unsupported-browser.scss",
+    app: "./app/startup.tsx"
   },
   module: {
     rules: [
@@ -36,8 +33,30 @@ const WEBPACK_CONFIG: Configuration = {
       }
     ]
   },
+  optimization: {
+    runtimeChunk: "single",
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          name: module => {
+            // get the name. E.g. node_modules/packageName/not/this/part.js
+            // or node_modules/packageName
+            const packageName = module.context.match(/[\\/]node_modules[\\/]((@.+[\\/])?.*?)([\\/]|$)/)[1];
+
+            // npm package names are URL-safe, but some servers don't like @ symbols
+            return packageName.replace(/@/g, "").replace(/[\\/]/g, "-");
+          },
+          test: /[\\/]node_modules[\\/]/
+        }
+      },
+      chunks: "all",
+      maxInitialRequests: Infinity,
+      minSize: 0
+    }
+  },
   output: {
-    filename: "scripts/[name]-[hash].js",
+    chunkFilename: "scripts/[name]-[contenthash].js",
+    filename: "scripts/[name]-[contenthash].js",
     path: buildPath,
     publicPath: "/"
   },
@@ -47,7 +66,6 @@ const WEBPACK_CONFIG: Configuration = {
     }),
     new HtmlTextPlugin({
       filename: "index.html",
-      inject: false,
       template: "app/index.html"
     })
   ],
