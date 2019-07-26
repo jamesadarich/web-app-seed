@@ -1,4 +1,4 @@
-FROM node:12.6.0 as build
+FROM node:12.7.0 as build
 
 # Get required files
 COPY . .
