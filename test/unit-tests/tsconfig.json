@@ -1,0 +1,23 @@
+{
+   "compilerOptions": {
+      "target": "es6",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "noImplicitAny": true,
+      "declaration": true,
+      "sourceMap": true,
+      "preserveConstEnums": true,
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "newLine": "LF"
+   },
+   "buildOnSave": false,
+   "compileOnSave": true,
+   "exclude": [
+      "./**/*.d.ts",
+      "../node_modules"
+   ],
+   "include": [
+      "./**/*.ts"
+   ]
+}

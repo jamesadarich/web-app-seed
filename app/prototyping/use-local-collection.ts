@@ -6,15 +6,15 @@ interface MockDoc {
 
 export function useLocalCollection<T>(documentType: string) {
     const getItems = () => {
-        return (JSON.parse(localStorage.getItem(documentType)) || []) as (T & MockDoc)[];
-    }
+        return (JSON.parse(localStorage.getItem(documentType)) || []) as Array<T & MockDoc>;
+    };
 
     const [ collection, setCollection ] = useState(getItems());
 
-    const setItems = (items: T[]) => {
+    const setItems = (items: Array<T>) => {
         localStorage.setItem(documentType, JSON.stringify(items));
         setCollection(getItems());
-    }
+    };
 
     return {
         async add(doc: T) {
@@ -30,14 +30,14 @@ export function useLocalCollection<T>(documentType: string) {
         },
         async remove(doc: T & MockDoc) {
             const docs = getItems();
-            
+
             setItems(docs.filter(d => d.id !== doc.id));
         },
         async getById(id: string) {
             const docs = getItems();
-            
+
             return docs.filter(d => d.id === id)[0];
         },
         collection
-    }
+    };
 }
