@@ -9,7 +9,9 @@
       "preserveConstEnums": true,
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
-      "newLine": "LF"
+      "esModuleInterop": true,
+      "newLine": "LF",
+      "jsx": "react"
    },
    "buildOnSave": false,
    "compileOnSave": true,
