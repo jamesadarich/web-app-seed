@@ -1,11 +1,11 @@
-// import { ContentContainerComponent } from "@justaddjam/strawberry";
+import { ContentContainerComponent } from "@justaddjam/strawberry";
 import * as React from "react";
 import "./loading.scss";
 
 export function Loading() {
     return (
-        <div>
+        <ContentContainerComponent>
             <h1>Loading...</h1>
-        </div>
+        </ContentContainerComponent>
     );
 }

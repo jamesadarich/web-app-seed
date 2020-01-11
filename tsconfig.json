@@ -9,15 +9,20 @@
       "preserveConstEnums": true,
       "experimentalDecorators": true,
       "emitDecoratorMetadata": true,
-      "newLine": "LF"
+      "esModuleInterop": true,
+      "newLine": "LF",
+      "jsx": "react"
    },
    "buildOnSave": false,
    "compileOnSave": true,
    "exclude": [
       "./**/*.d.ts",
-      "../node_modules"
+      "../../node_modules"
    ],
-   "include": [
+   "filesGlob": [
       "./**/*.ts"
-   ]
+   ],
+   "atom": {
+      "rewriteTsconfig": false
+   }
 }
