@@ -1,4 +1,4 @@
-FROM node:12.8.0 as build
+FROM node:15.11.0 as build
 
 # Get required files
 COPY . .
@@ -9,7 +9,7 @@ RUN npm install
 # Build app
 RUN npm run build
 
-FROM node:10-alpine
+FROM node:15.11.0
 
 # Create build directory
 RUN mkdir -p /app
