@@ -1,0 +1,40 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: react-redux
+    versions:
+    - 7.2.2
+    - 7.2.3
+  - dependency-name: stylelint
+    versions:
+    - 13.10.0
+    - 13.11.0
+    - 13.12.0
+    - 13.9.0
+  - dependency-name: lodash
+    versions:
+    - 4.17.20
+  - dependency-name: elliptic
+    versions:
+    - 6.5.3
+- package-ecosystem: docker
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: node
+    versions:
+    - 15.10.0
+    - 15.11.0
+    - 15.12.0
+    - 15.13.0
+    - 15.14.0
+    - 15.7.0
+    - 15.8.0
+    - 15.9.0
