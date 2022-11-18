@@ -64,7 +64,7 @@
     "css-loader": "^3.2.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "handlebars": "^4.4.5",
-    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-plugin": "^5.5.0",
     "imagemin-cli": "^5.0.0",
     "localtunnel": "^1.9.1",
     "mini-css-extract-plugin": "^0.8.0",
@@ -80,7 +80,7 @@
     "tslint": "^5.11.0",
     "typescript": "^3.2.2",
     "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.6",
+    "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.7.2",
     "whatwg-fetch": "^3.0.0"
   },
